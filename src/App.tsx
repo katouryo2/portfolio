@@ -1,34 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { MealType } from './types';
+import { useMealLog } from './hooks/useMealLog';
+import { DatePicker } from './components/DatePicker';
+import { FoodSearch } from './components/FoodSearch';
+import { DailySummary } from './components/DailySummary';
+import { MealSection } from './components/MealSection';
+import './App.css';
+
+const MEAL_ORDER: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {
+    selectedDate,
+    setSelectedDate,
+    dailyLog,
+    addFood,
+    removeFood,
+    totals,
+    goToPrevDay,
+    goToNextDay,
+  } = useMealLog();
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <header className="app__header">
+        <h1 className="app__title">カロリー計算</h1>
+        <DatePicker
+          date={selectedDate}
+          onPrev={goToPrevDay}
+          onNext={goToNextDay}
+          onChange={setSelectedDate}
+        />
+      </header>
+
+      <DailySummary totals={totals} />
+
+      <FoodSearch onAdd={addFood} />
+
+      <div className="app__meals">
+        {MEAL_ORDER.map(type => (
+          <MealSection
+            key={type}
+            mealType={type}
+            foods={dailyLog.meals[type]}
+            onRemove={foodId => removeFood(type, foodId)}
+          />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

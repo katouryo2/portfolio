@@ -1,0 +1,149 @@
+.food-search {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.food-search__form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.food-search__input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.food-search__input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.food-search__btn {
+  padding: 0.6rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.food-search__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.food-search__btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.food-search__meal-select {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.food-search__meal-btn {
+  flex: 1;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.food-search__meal-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.food-search__error {
+  margin-top: 0.75rem;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.food-search__results {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.food-search__result {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.food-search__result:last-child {
+  border-bottom: none;
+}
+
+.food-search__result-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 120px;
+}
+
+.food-search__thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.food-search__result-name {
+  display: block;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.food-search__result-serving {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.food-search__result-nutrients {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.food-search__add-btn {
+  padding: 0.3rem 0.75rem;
+  background: var(--success);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.food-search__add-btn:hover {
+  opacity: 0.9;
+}

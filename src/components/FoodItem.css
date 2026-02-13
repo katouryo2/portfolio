@@ -1,0 +1,72 @@
+.food-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.food-item:last-child {
+  border-bottom: none;
+}
+
+.food-item__info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.food-item__thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.food-item__name {
+  display: block;
+  font-weight: 500;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.food-item__serving {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.food-item__nutrients {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.food-item__cal {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.food-item__remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  line-height: 1;
+  transition: all 0.15s;
+}
+
+.food-item__remove:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
