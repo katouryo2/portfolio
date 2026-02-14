@@ -103,6 +103,7 @@ export function useMealLog() {
     setSelectedDate,
     dateStr,
     dailyLog,
+    logs,
     addFood,
     removeFood,
     totals,

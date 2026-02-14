@@ -1,0 +1,111 @@
+.calendar {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+
+.calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.calendar__month-label {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.calendar__nav-btn {
+  background: var(--surface);
+  border: none;
+  border-radius: var(--radius-xs);
+  width: 34px;
+  height: 34px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.calendar__nav-btn:hover {
+  background: var(--surface-hover);
+}
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar__weekday {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.25rem 0;
+}
+
+.calendar__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: none;
+  background: none;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  padding: 2px;
+  font-family: inherit;
+  color: var(--text);
+  transition: background 0.15s;
+}
+
+.calendar__cell:hover {
+  background: var(--surface-hover);
+}
+
+.calendar__cell--empty {
+  cursor: default;
+}
+
+.calendar__cell--empty:hover {
+  background: none;
+}
+
+.calendar__cell--selected {
+  background: var(--primary-gradient);
+  color: #fff;
+}
+
+.calendar__cell--selected:hover {
+  background: var(--primary-gradient);
+}
+
+.calendar__cell--selected .calendar__cal {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.calendar__cell--today:not(.calendar__cell--selected) {
+  box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.calendar__day {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.calendar__cal {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1;
+  margin-top: 1px;
+}

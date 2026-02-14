@@ -2,49 +2,57 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .date-picker__btn {
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  width: 36px;
-  height: 36px;
-  font-size: 1.25rem;
+  background: var(--surface);
+  border: none;
+  border-radius: var(--radius-xs);
+  width: 38px;
+  height: 38px;
+  font-size: 1.3rem;
   cursor: pointer;
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
 }
 
 .date-picker__btn:hover {
   background: var(--surface-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .date-picker__display {
   position: relative;
   cursor: pointer;
   text-align: center;
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 1rem;
+  background: var(--surface);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-sm);
 }
 
 .date-picker__label {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .date-picker__today {
   display: inline-block;
   margin-left: 0.5rem;
-  font-size: 0.75rem;
-  background: var(--primary);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
   color: #fff;
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
   vertical-align: middle;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .date-picker__input {

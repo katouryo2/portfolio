@@ -1,0 +1,147 @@
+.manual-entry {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  animation: fadeSlideIn 0.2s ease;
+}
+
+.manual-entry__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.manual-entry__title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.manual-entry__close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-xs);
+  line-height: 1;
+}
+
+.manual-entry__close:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.manual-entry__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.manual-entry__row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.manual-entry__field {
+  flex: 1;
+}
+
+.manual-entry__field--full {
+  width: 100%;
+}
+
+.manual-entry__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.manual-entry__label--protein {
+  color: var(--protein);
+}
+
+.manual-entry__label--fat {
+  color: var(--fat);
+}
+
+.manual-entry__label--carbs {
+  color: var(--carbs);
+}
+
+.manual-entry__required {
+  color: var(--danger);
+}
+
+.manual-entry__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.manual-entry__input {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-size: 0.88rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.2s;
+}
+
+.manual-entry__input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.manual-entry__input-wrap .manual-entry__input {
+  padding-right: 2.2rem;
+}
+
+.manual-entry__unit {
+  position: absolute;
+  right: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Hide number input spinners */
+.manual-entry__input[type="number"]::-webkit-inner-spin-button,
+.manual-entry__input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.manual-entry__input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.manual-entry__submit {
+  margin-top: 0.25rem;
+  padding: 0.6rem;
+  background: var(--primary-gradient);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-xs);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.manual-entry__submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.manual-entry__submit:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(79, 140, 255, 0.35);
+}

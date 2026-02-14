@@ -1,5 +1,5 @@
 import { FoodItem, CalorieNinjasFood } from '../types';
-import { translateQuery, containsJapanese } from './foodDictionary';
+import { translateQuery, containsJapanese, addDefaultServing } from './foodDictionary';
 
 const API_URL = '/api/nutrition';
 
@@ -19,6 +19,17 @@ export async function searchFood(query: string): Promise<FoodItem[]> {
       throw new Error('この食品名は辞書に登録されていません。英語で入力するか、別の日本語名をお試しください');
     }
     apiQuery = translated;
+  } else {
+    // 英語入力: 数量を食品名の前に正規化（"rice 700g" → "700g rice"）
+    const qtyMatch = apiQuery.match(/^(.+?)\s+(\d+\s*g)\s*$/i);
+    if (qtyMatch) {
+      apiQuery = `${qtyMatch[2]} ${qtyMatch[1]}`;
+    }
+  }
+
+  // ユーザーが量を指定していなければ、一般的な1食分の量を自動付与
+  if (!/\d/.test(apiQuery)) {
+    apiQuery = addDefaultServing(apiQuery);
   }
 
   const res = await fetch(`${API_URL}?query=${encodeURIComponent(apiQuery)}`, {

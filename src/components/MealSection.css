@@ -1,8 +1,13 @@
 .meal-section {
   background: var(--surface);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 1rem 1.25rem;
-  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+
+.meal-section:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .meal-section__header {
@@ -13,26 +18,27 @@
 }
 
 .meal-section__icon {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 
 .meal-section__title {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   flex: 1;
 }
 
 .meal-section__total {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--primary);
 }
 
 .meal-section__empty {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
+  font-style: italic;
 }
 
 .meal-section__list {

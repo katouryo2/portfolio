@@ -27,6 +27,15 @@ export interface DailyLog {
   meals: Record<MealType, FoodItem[]>;
 }
 
+export interface FavoriteFoodData {
+  name: string;
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+  servingSize: number;
+}
+
 export interface CalorieNinjasFood {
   name: string;
   calories: number;
