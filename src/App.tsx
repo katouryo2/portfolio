@@ -96,6 +96,7 @@ function App() {
             selectedDate={selectedDate}
             logs={logs}
             onSelectDate={setSelectedDate}
+            calorieGoal={goals.calories}
           />
         </>
       )}

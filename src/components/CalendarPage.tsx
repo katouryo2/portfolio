@@ -1,12 +1,14 @@
 import { useMemo } from 'react';
 import { DailyLog, MealType, MEAL_LABELS, FoodItem } from '../types';
 import { MonthlyCalendar } from './MonthlyCalendar';
+import { WeeklyChart } from './WeeklyChart';
 import './CalendarPage.css';
 
 interface Props {
   selectedDate: Date;
   logs: Record<string, DailyLog>;
   onSelectDate: (date: Date) => void;
+  calorieGoal?: number;
 }
 
 const MEAL_ORDER: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
@@ -19,10 +21,13 @@ const MEAL_ICONS: Record<MealType, string> = {
 };
 
 function formatDate(date: Date): string {
-  return date.toISOString().split('T')[0];
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
 }
 
-export function CalendarPage({ selectedDate, logs, onSelectDate }: Props) {
+export function CalendarPage({ selectedDate, logs, onSelectDate, calorieGoal }: Props) {
   const dateStr = formatDate(selectedDate);
   const dayLog = logs[dateStr];
 
@@ -41,11 +46,18 @@ export function CalendarPage({ selectedDate, logs, onSelectDate }: Props) {
 
   return (
     <div className="calendar-page">
-      <MonthlyCalendar
-        selectedDate={selectedDate}
-        logs={logs}
-        onSelectDate={onSelectDate}
-      />
+      <div className="calendar-page__calendar">
+        <MonthlyCalendar
+          selectedDate={selectedDate}
+          logs={logs}
+          onSelectDate={onSelectDate}
+        />
+        <WeeklyChart
+          selectedDate={selectedDate}
+          logs={logs}
+          calorieGoal={calorieGoal}
+        />
+      </div>
 
       <div className="calendar-page__detail">
         <h3 className="calendar-page__detail-title">{displayDate}の記録</h3>

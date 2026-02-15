@@ -1,9 +1,26 @@
+.calendar-page {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-top: 0.75rem;
+}
+
+.calendar-page__calendar {
+  flex: 0 0 400px;
+  min-width: 0;
+}
+
 .calendar-page__detail {
-  margin-top: 1rem;
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1rem 1.25rem;
 }
 
 .calendar-page__detail-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
   color: var(--text);
@@ -100,4 +117,15 @@
   color: var(--text-secondary);
   padding: 2rem 0;
   font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+  .calendar-page {
+    flex-direction: column;
+  }
+
+  .calendar-page__calendar {
+    flex: none;
+    width: 100%;
+  }
 }

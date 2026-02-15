@@ -50,7 +50,7 @@ export function AiAdvice({ dailyLog, totals, goals }: Props) {
             onClick={handleAsk}
             disabled={!hasAnyFood}
           >
-            {hasAnyFood ? '&#10024; AIに聞いてみる' : '食事を記録してから利用できます'}
+            {hasAnyFood ? 'AIに聞いてみる' : '食事を記録してから利用できます'}
           </button>
         </div>
       )}
