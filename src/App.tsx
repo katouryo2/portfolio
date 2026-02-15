@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MealType } from './types';
+import { useAuth } from './contexts/AuthContext';
 import { useMealLog } from './hooks/useMealLog';
 import { useFavorites } from './hooks/useFavorites';
 import { useGoals } from './hooks/useGoals';
@@ -10,6 +11,7 @@ import { DailySummary } from './components/DailySummary';
 import { MealSection } from './components/MealSection';
 import { AiAdvice } from './components/AiAdvice';
 import { CalendarPage } from './components/CalendarPage';
+import { UserMenu } from './components/UserMenu';
 import './App.css';
 
 type Page = 'home' | 'calendar';
@@ -17,6 +19,7 @@ type Page = 'home' | 'calendar';
 const MEAL_ORDER: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
 
 function App() {
+  const { loading } = useAuth();
   const [page, setPage] = useState<Page>('home');
 
   const {
@@ -49,12 +52,21 @@ function App() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="app app--loading">
+        <p>読み込み中...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       {page === 'home' ? (
         <>
           <header className="app__header">
             <h1 className="app__title">カロリー計算</h1>
+            <UserMenu />
             <DatePicker
               date={selectedDate}
               onPrev={goToPrevDay}
@@ -91,6 +103,7 @@ function App() {
         <>
           <header className="app__header">
             <h1 className="app__title">カレンダー</h1>
+            <UserMenu />
           </header>
           <CalendarPage
             selectedDate={selectedDate}

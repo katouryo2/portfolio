@@ -1,9 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { FavoriteFoodData, FoodItem } from '../types';
+import { useAuth } from '../contexts/AuthContext';
+import { subscribeFavorites, setFavorites as setFirestoreFavorites } from '../lib/firestoreService';
 
 const STORAGE_KEY = 'calorie-tracker-favorites';
 
-function loadFavorites(): FavoriteFoodData[] {
+function loadFavoritesLocal(): FavoriteFoodData[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -12,7 +14,7 @@ function loadFavorites(): FavoriteFoodData[] {
   }
 }
 
-function saveFavorites(favs: FavoriteFoodData[]) {
+function saveFavoritesLocal(favs: FavoriteFoodData[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
 }
 
@@ -28,24 +30,48 @@ function toFavData(food: FoodItem): FavoriteFoodData {
 }
 
 export function useFavorites() {
-  const [favorites, setFavorites] = useState<FavoriteFoodData[]>(loadFavorites);
+  const { user, isGuest } = useAuth();
+  const [favorites, setFavorites] = useState<FavoriteFoodData[]>(isGuest ? loadFavoritesLocal : () => []);
+
+  useEffect(() => {
+    if (isGuest || !user) {
+      setFavorites(loadFavoritesLocal());
+      return;
+    }
+    const unsubscribe = subscribeFavorites(user.uid, (firestoreFavs) => {
+      setFavorites(firestoreFavs);
+    });
+    return unsubscribe;
+  }, [isGuest, user]);
 
   const addFavorite = useCallback((food: FoodItem) => {
     setFavorites(prev => {
       if (prev.some(f => f.name === food.name)) return prev;
       const next = [...prev, toFavData(food)];
-      saveFavorites(next);
+
+      if (isGuest) {
+        saveFavoritesLocal(next);
+      } else if (user) {
+        setFirestoreFavorites(user.uid, next);
+      }
+
       return next;
     });
-  }, []);
+  }, [isGuest, user]);
 
   const removeFavorite = useCallback((name: string) => {
     setFavorites(prev => {
       const next = prev.filter(f => f.name !== name);
-      saveFavorites(next);
+
+      if (isGuest) {
+        saveFavoritesLocal(next);
+      } else if (user) {
+        setFirestoreFavorites(user.uid, next);
+      }
+
       return next;
     });
-  }, []);
+  }, [isGuest, user]);
 
   const isFavorite = useCallback((name: string) => {
     return favorites.some(f => f.name === name);

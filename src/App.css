@@ -5,8 +5,18 @@
   min-height: 100vh;
 }
 
+.app--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
 .app__header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.75rem 0 1rem;
 }
 
