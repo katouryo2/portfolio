@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getAiAdvice } from '../api/gemini';
 import { DailyLog } from '../types';
 import { NutritionGoals } from '../hooks/useGoals';
@@ -14,6 +14,12 @@ export function AiAdvice({ dailyLog, totals, goals }: Props) {
   const [advice, setAdvice] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setAdvice('');
+    setError('');
+    setLoading(false);
+  }, [dailyLog.date]);
 
   const hasAnyFood = Object.values(dailyLog.meals).some(foods => foods.length > 0);
 
