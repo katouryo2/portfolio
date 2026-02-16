@@ -134,6 +134,8 @@ export function FoodSearch({ onAdd, onToggleFavorite, isFavorite }: Props) {
           selectedMeal={selectedMeal}
           onAdd={onAdd}
           onClose={() => setShowManual(false)}
+          onToggleFavorite={onToggleFavorite}
+          isFavorite={isFavorite}
         />
       )}
     </div>

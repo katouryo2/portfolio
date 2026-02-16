@@ -1,13 +1,16 @@
 .weekly-chart {
-  background: var(--surface);
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--glass-shadow);
   padding: 1rem;
   margin-top: 0.75rem;
 }
 
 .weekly-chart__title {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text);
   margin: 0 0 0.5rem;

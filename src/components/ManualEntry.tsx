@@ -6,9 +6,11 @@ interface Props {
   selectedMeal: MealType;
   onAdd: (mealType: MealType, food: FoodItem) => void;
   onClose: () => void;
+  onToggleFavorite?: (food: FoodItem) => void;
+  isFavorite?: (name: string) => boolean;
 }
 
-export function ManualEntry({ selectedMeal, onAdd, onClose }: Props) {
+export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, isFavorite }: Props) {
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
   const [protein, setProtein] = useState('');
@@ -143,9 +145,33 @@ export function ManualEntry({ selectedMeal, onAdd, onClose }: Props) {
           </div>
         </div>
 
-        <button className="manual-entry__submit" type="submit" disabled={!canSubmit}>
-          + {MEAL_LABELS[selectedMeal]}に追加
-        </button>
+        <div className="manual-entry__actions">
+          <button className="manual-entry__submit" type="submit" disabled={!canSubmit}>
+            + {MEAL_LABELS[selectedMeal]}に追加
+          </button>
+          {onToggleFavorite && (
+            <button
+              type="button"
+              className={`manual-entry__fav-btn ${name.trim() && isFavorite?.(name.trim()) ? 'active' : ''}`}
+              disabled={!canSubmit}
+              onClick={() => {
+                if (!canSubmit) return;
+                const food: FoodItem = {
+                  id: crypto.randomUUID(),
+                  name: name.trim(),
+                  calories: Math.round(Number(calories) || 0),
+                  protein: Math.round((Number(protein) || 0) * 10) / 10,
+                  fat: Math.round((Number(fat) || 0) * 10) / 10,
+                  carbs: Math.round((Number(carbs) || 0) * 10) / 10,
+                  servingSize: Number(servingSize) || 0,
+                };
+                onToggleFavorite(food);
+              }}
+            >
+              {name.trim() && isFavorite?.(name.trim()) ? '\u2605' : '\u2606'} お気に入り
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

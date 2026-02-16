@@ -19,7 +19,7 @@ export function MealSection({ mealType, foods, onRemove }: Props) {
   const totalCalories = foods.reduce((sum, f) => sum + f.calories, 0);
 
   return (
-    <div className="meal-section">
+    <div className={`meal-section meal-section--${mealType}`}>
       <div className="meal-section__header">
         <span className="meal-section__icon">{MEAL_ICONS[mealType]}</span>
         <h3 className="meal-section__title">{MEAL_LABELS[mealType]}</h3>

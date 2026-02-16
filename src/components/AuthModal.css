@@ -1,23 +1,28 @@
 .auth-modal__overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 200;
   animation: authFadeIn 0.2s ease;
 }
 
 .auth-modal {
-  background: var(--surface);
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  padding: 1.75rem;
   width: 90%;
   max-width: 380px;
   position: relative;
-  animation: authSlideIn 0.25s ease;
+  animation: authSlideIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .auth-modal__close {
@@ -29,29 +34,32 @@
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--text-muted);
-  padding: 0.25rem;
+  padding: 0.3rem;
   line-height: 1;
+  border-radius: 50%;
+  transition: all 0.15s;
 }
 
 .auth-modal__close:hover {
   color: var(--text);
+  background: var(--surface-hover);
 }
 
 .auth-modal__tabs {
   display: flex;
   gap: 0;
-  margin-bottom: 1.25rem;
-  border-bottom: 2px solid var(--border);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .auth-modal__tab {
   flex: 1;
-  padding: 0.6rem 0;
+  padding: 0.65rem 0;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  font-size: 0.92rem;
+  margin-bottom: -1px;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
@@ -66,7 +74,7 @@
 .auth-modal__form {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.9rem;
 }
 
 .auth-modal__field {
@@ -76,19 +84,20 @@
 }
 
 .auth-modal__label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
 .auth-modal__input {
-  padding: 0.6rem 0.75rem;
-  border: 2px solid var(--border);
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
   border-radius: var(--radius-xs);
-  font-size: 0.92rem;
-  background: var(--bg);
+  font-size: 0.9rem;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
   color: var(--text);
-  transition: border-color 0.2s;
+  transition: all 0.2s;
 }
 
 .auth-modal__input:focus {
@@ -99,33 +108,32 @@
 
 .auth-modal__error {
   color: var(--danger);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 500;
   margin: 0;
-  padding: 0.4rem 0.6rem;
-  background: rgba(255, 69, 58, 0.08);
+  padding: 0.45rem 0.7rem;
+  background: var(--danger-light);
   border-radius: var(--radius-xs);
 }
 
 .auth-modal__submit {
   padding: 0.7rem;
-  background: var(--primary-gradient);
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: var(--radius-xs);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   margin-top: 0.25rem;
-  transition: box-shadow 0.2s;
 }
 
 .auth-modal__submit:hover:not(:disabled) {
-  box-shadow: 0 4px 12px rgba(79, 140, 255, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.35);
 }
 
 .auth-modal__submit:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -135,6 +143,6 @@
 }
 
 @keyframes authSlideIn {
-  from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }

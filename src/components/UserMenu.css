@@ -1,23 +1,23 @@
 .user-menu {
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .user-menu__login-btn {
   padding: 0.4rem 1rem;
-  background: var(--primary-gradient);
+  background: var(--primary);
   color: #fff;
   border: none;
-  border-radius: var(--radius-xs);
-  font-size: 0.82rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  transition: box-shadow 0.2s;
 }
 
 .user-menu__login-btn:hover {
-  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.35);
 }
 
 .user-menu__logged-in {
@@ -27,21 +27,26 @@
 }
 
 .user-menu__email {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
-  max-width: 160px;
+  max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
 }
 
 .user-menu__logout-btn {
-  padding: 0.35rem 0.7rem;
+  padding: 0.3rem 0.65rem;
   background: transparent;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-xs);
+  border: 1px solid var(--border);
+  border-radius: 999px;
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -50,4 +55,5 @@
 .user-menu__logout-btn:hover {
   border-color: var(--danger);
   color: var(--danger);
+  background: var(--danger-light);
 }

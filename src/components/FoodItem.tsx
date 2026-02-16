@@ -17,9 +17,11 @@ export function FoodItemRow({ food, onRemove }: Props) {
       </div>
       <div className="food-item__nutrients">
         <span className="food-item__cal">{food.calories} kcal</span>
-        <span>P: {food.protein}g</span>
-        <span>F: {food.fat}g</span>
-        <span>C: {food.carbs}g</span>
+        <div className="food-item__macros">
+          <span>P:{food.protein}g</span>
+          <span>F:{food.fat}g</span>
+          <span>C:{food.carbs}g</span>
+        </div>
       </div>
       <button className="food-item__remove" onClick={onRemove} aria-label="削除">
         ×

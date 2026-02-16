@@ -13,10 +13,13 @@
 .calendar-page__detail {
   flex: 1;
   min-width: 0;
-  background: var(--surface);
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 1rem 1.25rem;
+  box-shadow: var(--glass-shadow);
+  padding: 1.25rem;
 }
 
 .calendar-page__detail-title {
@@ -38,13 +41,14 @@
   flex-direction: column;
   align-items: center;
   padding: 0.5rem 0.25rem;
-  background: var(--surface);
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
 }
 
 .calendar-page__summary-item--cal {
-  background: var(--primary-gradient);
+  background: var(--primary);
   border: none;
 }
 
@@ -54,13 +58,13 @@
 }
 
 .calendar-page__summary-value {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
 }
 
 .calendar-page__summary-label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--text-secondary);
   margin-top: 0.1rem;
 }
@@ -72,9 +76,10 @@
 }
 
 .calendar-page__meal {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
   padding: 0.6rem 0.75rem;
 }
 
@@ -83,13 +88,13 @@
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   margin-bottom: 0.4rem;
 }
 
 .calendar-page__meal-cal {
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
 }
 
 .calendar-page__food-list {
@@ -102,7 +107,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0.3rem 0;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
 }
@@ -114,9 +119,9 @@
 
 .calendar-page__empty {
   text-align: center;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   padding: 2rem 0;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 @media (max-width: 700px) {

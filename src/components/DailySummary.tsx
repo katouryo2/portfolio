@@ -43,18 +43,33 @@ function NutrientBar({ label, value, max, unit, color }: NutrientBarProps) {
 
 export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
   const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState(goals);
+  const [draft, setDraft] = useState({
+    calories: String(goals.calories),
+    protein: String(goals.protein),
+    fat: String(goals.fat),
+    carbs: String(goals.carbs),
+  });
 
   const calPct = Math.min((totals.calories / goals.calories) * 100, 100);
   const remaining = goals.calories - totals.calories;
 
   const handleOpen = () => {
-    setDraft(goals);
+    setDraft({
+      calories: String(goals.calories),
+      protein: String(goals.protein),
+      fat: String(goals.fat),
+      carbs: String(goals.carbs),
+    });
     setEditing(true);
   };
 
   const handleSave = () => {
-    onUpdateGoals(draft);
+    onUpdateGoals({
+      calories: Number(draft.calories) || 0,
+      protein: Number(draft.protein) || 0,
+      fat: Number(draft.fat) || 0,
+      carbs: Number(draft.carbs) || 0,
+    });
     setEditing(false);
   };
 
@@ -65,8 +80,8 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
           <svg viewBox="0 0 100 100">
             <defs>
               <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#4f8cff" />
-                <stop offset="100%" stopColor="#6c63ff" />
+                <stop offset="0%" stopColor="#007AFF" />
+                <stop offset="100%" stopColor="#5856D6" />
               </linearGradient>
             </defs>
             <circle
@@ -119,7 +134,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.calories}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, calories: Number(e.target.value) || 0 }))}
+                    onChange={e => setDraft(d => ({ ...d, calories: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">kcal</span>
                 </div>
@@ -131,7 +146,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.protein}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, protein: Number(e.target.value) || 0 }))}
+                    onChange={e => setDraft(d => ({ ...d, protein: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
@@ -143,7 +158,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.fat}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, fat: Number(e.target.value) || 0 }))}
+                    onChange={e => setDraft(d => ({ ...d, fat: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
@@ -155,7 +170,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.carbs}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, carbs: Number(e.target.value) || 0 }))}
+                    onChange={e => setDraft(d => ({ ...d, carbs: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
