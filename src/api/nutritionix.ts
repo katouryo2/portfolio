@@ -1,7 +1,9 @@
 import { FoodItem, CalorieNinjasFood } from '../types';
 import { translateQuery, containsJapanese, addDefaultServing } from './foodDictionary';
 
-const API_URL = '/api/nutrition';
+const API_URL = import.meta.env.DEV
+  ? '/api/nutrition'
+  : 'https://api.calorieninjas.com/v1/nutrition';
 
 export async function searchFood(query: string): Promise<FoodItem[]> {
   const apiKey = import.meta.env.VITE_CALORIENINJAS_API_KEY;

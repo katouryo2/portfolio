@@ -1,7 +1,9 @@
 import { DailyLog, MEAL_LABELS, MealType } from '../types';
 import { NutritionGoals } from '../hooks/useGoals';
 
-const API_URL = '/api/gemini';
+const API_URL = import.meta.env.DEV
+  ? '/api/gemini'
+  : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
 function buildPrompt(dailyLog: DailyLog, totals: { calories: number; protein: number; fat: number; carbs: number }, goals: NutritionGoals): string {
   const mealSummary = (Object.keys(MEAL_LABELS) as MealType[])
