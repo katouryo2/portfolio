@@ -6,6 +6,10 @@
   ## デモ
   (https://vite-project-git-feature-calorie-tracker-katouryos-projects.vercel.app/)
                                                                                                
+<img width="1470" height="956" alt="スクリーンショット 2026-02-20 19 52 14" src="https://github.com/user-attachments/assets/ab65ca94-d405-4edb-9888-f63c7353fd11" />
+
+<img width="1470" height="956" alt="スクリーンショット 2026-02-20 19 59 23" src="https://github.com/user-attachments/assets/50b95356-d352-46cf-a9c5-8771581a15b1" />
+
 
   ## 主な機能
 
