@@ -1,7 +1,10 @@
 # カロリー計算アプリ                                                                         
                                                                                              
   React + TypeScript で構築したカロリー管理アプリケーションです。食品の栄養素検索、日別の食事記
-  録、AIによる栄養アドバイスなど、日々の食事管理をサポートする機能を備えています。             
+  録、AIによる栄養アドバイスなど、日々の食事管理をサポートする機能を備えています。 
+
+  ## デモ
+  (https://vite-project-git-feature-calorie-tracker-katouryos-projects.vercel.app/)
                                                                                                
 
   ## 主な機能
