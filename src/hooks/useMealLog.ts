@@ -16,7 +16,8 @@ function loadLogsLocal(): Record<string, DailyLog> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : {};
-  } catch {
+  } catch (e) {
+    console.warn('Failed to parse meal logs from localStorage', e);
     return {};
   }
 }

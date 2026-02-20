@@ -48,7 +48,7 @@ function App() {
     if (isFavorite(food.name)) {
       removeFavorite(food.name);
     } else {
-      addFavorite(food as any);
+      addFavorite(food);
     }
   };
 

@@ -17,7 +17,8 @@ function loadGoalsLocal(): NutritionGoals {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? { ...DEFAULT_GOALS, ...JSON.parse(raw) } : DEFAULT_GOALS;
-  } catch {
+  } catch (e) {
+    console.warn('Failed to parse goals from localStorage', e);
     return DEFAULT_GOALS;
   }
 }

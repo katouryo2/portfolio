@@ -7,11 +7,14 @@ export function UserMenu() {
   const { user, isGuest, logout } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+  const [logoutError, setLogoutError] = useState(false);
+
   const handleLogout = async () => {
     try {
+      setLogoutError(false);
       await logout();
     } catch {
-      // ignore
+      setLogoutError(true);
     }
   };
 
@@ -28,6 +31,7 @@ export function UserMenu() {
             <button className="user-menu__logout-btn" onClick={handleLogout}>
               ログアウト
             </button>
+            {logoutError && <span className="user-menu__error">ログアウトに失敗しました</span>}
           </div>
         )}
       </div>

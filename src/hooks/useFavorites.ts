@@ -9,24 +9,14 @@ function loadFavoritesLocal(): FavoriteFoodData[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
-  } catch {
+  } catch (e) {
+    console.warn('Failed to parse favorites from localStorage', e);
     return [];
   }
 }
 
 function saveFavoritesLocal(favs: FavoriteFoodData[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
-}
-
-function toFavData(food: FoodItem): FavoriteFoodData {
-  return {
-    name: food.name,
-    calories: food.calories,
-    protein: food.protein,
-    fat: food.fat,
-    carbs: food.carbs,
-    servingSize: food.servingSize,
-  };
 }
 
 export function useFavorites() {
@@ -44,10 +34,10 @@ export function useFavorites() {
     return unsubscribe;
   }, [isGuest, user]);
 
-  const addFavorite = useCallback((food: FoodItem) => {
+  const addFavorite = useCallback((food: FavoriteFoodData) => {
     setFavorites(prev => {
       if (prev.some(f => f.name === food.name)) return prev;
-      const next = [...prev, toFavData(food)];
+      const next = [...prev, { ...food }];
 
       if (isGuest) {
         saveFavoritesLocal(next);
