@@ -337,11 +337,6 @@ const DEFAULT_SERVING: Record<string, number> = {
   'mixed nuts': 25,
 };
 
-// クエリに量が既に含まれているか判定
-function hasQuantity(query: string): boolean {
-  return /\d+\s*(g|gram|グラム|個|杯|枚|本|切れ|パック|oz|cup|slice|piece)/i.test(query);
-}
-
 // 食品名に対する一般的な量を取得
 export function getDefaultServing(foodName: string): number | null {
   const lower = foodName.toLowerCase().trim();

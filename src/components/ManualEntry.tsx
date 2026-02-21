@@ -20,21 +20,20 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
 
   const canSubmit = name.trim() && calories;
 
+  const buildFood = (): FoodItem => ({
+    id: crypto.randomUUID(),
+    name: name.trim(),
+    calories: Math.round(Number(calories) || 0),
+    protein: Math.round((Number(protein) || 0) * 10) / 10,
+    fat: Math.round((Number(fat) || 0) * 10) / 10,
+    carbs: Math.round((Number(carbs) || 0) * 10) / 10,
+    servingSize: Number(servingSize) || 0,
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSubmit) return;
-
-    const food: FoodItem = {
-      id: crypto.randomUUID(),
-      name: name.trim(),
-      calories: Math.round(Number(calories) || 0),
-      protein: Math.round((Number(protein) || 0) * 10) / 10,
-      fat: Math.round((Number(fat) || 0) * 10) / 10,
-      carbs: Math.round((Number(carbs) || 0) * 10) / 10,
-      servingSize: Number(servingSize) || 0,
-    };
-
-    onAdd(selectedMeal, food);
+    onAdd(selectedMeal, buildFood());
     onClose();
   };
 
@@ -156,16 +155,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
               disabled={!canSubmit}
               onClick={() => {
                 if (!canSubmit) return;
-                const food: FoodItem = {
-                  id: crypto.randomUUID(),
-                  name: name.trim(),
-                  calories: Math.round(Number(calories) || 0),
-                  protein: Math.round((Number(protein) || 0) * 10) / 10,
-                  fat: Math.round((Number(fat) || 0) * 10) / 10,
-                  carbs: Math.round((Number(carbs) || 0) * 10) / 10,
-                  servingSize: Number(servingSize) || 0,
-                };
-                onToggleFavorite(food);
+                onToggleFavorite(buildFood());
               }}
             >
               {name.trim() && isFavorite?.(name.trim()) ? '\u2605' : '\u2606'} お気に入り

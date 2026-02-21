@@ -1,13 +1,98 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { getAiAdvice } from '../api/gemini';
 import { DailyLog } from '../types';
-import { NutritionGoals } from '../hooks/useGoals';
+import type { NutritionGoals } from '../types';
 import './AiAdvice.css';
 
 interface Props {
   dailyLog: DailyLog;
   totals: { calories: number; protein: number; fat: number; carbs: number };
   goals: NutritionGoals;
+}
+
+type BlockType = 'heading' | 'bullet' | 'numbered' | 'paragraph';
+
+interface Block {
+  type: BlockType;
+  lines: string[];
+}
+
+/** インライン Markdown（**bold**）を ReactNode に変換する */
+function renderInline(text: string): ReactNode {
+  const stripped = text.replace(/\*\*/g, '');
+  const parts = text.split(/\*\*(.+?)\*\*/g);
+  if (parts.length <= 1) return stripped;
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <strong key={i}>{part}</strong> : part,
+  );
+}
+
+/** Markdown テキストをブロック単位にパースする */
+function parseBlocks(text: string): Block[] {
+  const blocks: Block[] = [];
+
+  for (const line of text.split('\n')) {
+    const trimmed = line.trim();
+    if (trimmed === '') continue;
+
+    let type: BlockType;
+    let content: string;
+
+    if (/^#{2,3}\s+/.test(trimmed)) {
+      type = 'heading';
+      content = trimmed.replace(/^#{2,3}\s+/, '');
+    } else if (/^[-*]\s+/.test(trimmed)) {
+      type = 'bullet';
+      content = trimmed.replace(/^[-*]\s+/, '');
+    } else if (/^\d+\.\s+/.test(trimmed)) {
+      type = 'numbered';
+      content = trimmed.replace(/^\d+\.\s+/, '');
+    } else {
+      type = 'paragraph';
+      content = trimmed;
+    }
+
+    const prev = blocks[blocks.length - 1];
+    if (prev && prev.type === type && (type === 'bullet' || type === 'numbered')) {
+      prev.lines.push(content);
+    } else {
+      blocks.push({ type, lines: [content] });
+    }
+  }
+
+  return blocks;
+}
+
+/** パース済みブロックを React 要素に変換する */
+function renderBlocks(blocks: Block[]): ReactNode[] {
+  return blocks.map((block, i) => {
+    switch (block.type) {
+      case 'heading':
+        return (
+          <h4 key={i} className="ai-advice__section-title">
+            {renderInline(block.lines[0])}
+          </h4>
+        );
+      case 'bullet':
+        return (
+          <ul key={i} className="ai-advice__list">
+            {block.lines.map((line, j) => (
+              <li key={j} className="ai-advice__list-item">{renderInline(line)}</li>
+            ))}
+          </ul>
+        );
+      case 'numbered':
+        return (
+          <ol key={i} className="ai-advice__list">
+            {block.lines.map((line, j) => (
+              <li key={j} className="ai-advice__list-item">{renderInline(line)}</li>
+            ))}
+          </ol>
+        );
+      case 'paragraph':
+        return <p key={i}>{renderInline(block.lines[0])}</p>;
+    }
+  });
 }
 
 export function AiAdvice({ dailyLog, totals, goals }: Props) {
@@ -80,41 +165,7 @@ export function AiAdvice({ dailyLog, totals, goals }: Props) {
       {advice && (
         <div className="ai-advice__content">
           <div className="ai-advice__text">
-            {advice.split('\n').map((line, i) => {
-              const trimmed = line.trim();
-              if (trimmed === '') return null;
-              // ## or ### headings
-              const headingMatch = trimmed.match(/^(#{2,3})\s+(.+)/);
-              if (headingMatch) {
-                return <h4 key={i} className="ai-advice__section-title">{headingMatch[2]}</h4>;
-              }
-              // bullet lists (- or *)
-              const listMatch = trimmed.match(/^[-*]\s+(.+)/);
-              if (listMatch) {
-                return <li key={i} className="ai-advice__list-item">{listMatch[1].replace(/\*\*/g, '')}</li>;
-              }
-              // numbered lists
-              const numMatch = trimmed.match(/^\d+\.\s+(.+)/);
-              if (numMatch) {
-                return <li key={i} className="ai-advice__list-item">{numMatch[1].replace(/\*\*/g, '')}</li>;
-              }
-              // bold-only lines
-              if (trimmed.startsWith('**') && trimmed.endsWith('**')) {
-                return <p key={i} className="ai-advice__bold">{trimmed.replace(/\*\*/g, '')}</p>;
-              }
-              // inline bold within text
-              const parts = trimmed.split(/\*\*(.+?)\*\*/g);
-              if (parts.length > 1) {
-                return (
-                  <p key={i}>
-                    {parts.map((part, j) =>
-                      j % 2 === 1 ? <strong key={j}>{part}</strong> : part
-                    )}
-                  </p>
-                );
-              }
-              return <p key={i}>{trimmed}</p>;
-            })}
+            {renderBlocks(parseBlocks(advice))}
           </div>
           <button className="ai-advice__btn ai-advice__btn--refresh" onClick={handleAsk}>
             &#128260; もう一度聞く

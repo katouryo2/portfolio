@@ -10,6 +10,7 @@ import {
   ReferenceLine,
 } from 'recharts';
 import { DailyLog } from '../types';
+import { formatDate, getDayCalories } from '../lib/utils';
 import './WeeklyChart.css';
 
 interface Props {
@@ -18,27 +19,13 @@ interface Props {
   calorieGoal?: number;
 }
 
-function formatDateKey(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
-function getDayCalories(log: DailyLog | undefined): number {
-  if (!log) return 0;
-  return Object.values(log.meals)
-    .flat()
-    .reduce((sum, f) => sum + f.calories, 0);
-}
-
 export function WeeklyChart({ selectedDate, logs, calorieGoal }: Props) {
   const data = useMemo(() => {
     const result = [];
     for (let i = 6; i >= 0; i--) {
       const d = new Date(selectedDate);
       d.setDate(d.getDate() - i);
-      const key = formatDateKey(d);
+      const key = formatDate(d);
       const cal = getDayCalories(logs[key]);
       result.push({
         label: `${d.getMonth() + 1}/${d.getDate()}`,

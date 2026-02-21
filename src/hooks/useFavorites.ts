@@ -24,10 +24,7 @@ export function useFavorites() {
   const [favorites, setFavorites] = useState<FavoriteFoodData[]>(isGuest ? loadFavoritesLocal : () => []);
 
   useEffect(() => {
-    if (isGuest || !user) {
-      setFavorites(loadFavoritesLocal());
-      return;
-    }
+    if (isGuest || !user) return;
     const unsubscribe = subscribeFavorites(user.uid, (firestoreFavs) => {
       setFavorites(firestoreFavs);
     });

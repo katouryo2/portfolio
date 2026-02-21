@@ -1,4 +1,5 @@
-import { FoodItem, MealType, MEAL_LABELS } from '../types';
+import { MEAL_LABELS, MEAL_ICONS } from '../types';
+import type { FoodItem, MealType } from '../types';
 import { FoodItemRow } from './FoodItem';
 import './MealSection.css';
 
@@ -7,13 +8,6 @@ interface Props {
   foods: FoodItem[];
   onRemove: (foodId: string) => void;
 }
-
-const MEAL_ICONS: Record<MealType, string> = {
-  breakfast: '🌅',
-  lunch: '☀️',
-  dinner: '🌙',
-  snack: '🍪',
-};
 
 export function MealSection({ mealType, foods, onRemove }: Props) {
   const totalCalories = foods.reduce((sum, f) => sum + f.calories, 0);

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { MealType } from './types';
+import { MEAL_ORDER } from './types';
+import type { FavoriteFoodData } from './types';
 import { useAuth } from './contexts/AuthContext';
 import { useMealLog } from './hooks/useMealLog';
 import { useFavorites } from './hooks/useFavorites';
@@ -16,8 +17,6 @@ import './App.css';
 
 type Page = 'home' | 'calendar';
 
-const MEAL_ORDER: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
-
 function App() {
   const { loading } = useAuth();
   const [page, setPage] = useState<Page>('home');
@@ -25,6 +24,7 @@ function App() {
   const {
     selectedDate,
     setSelectedDate,
+    dateStr,
     dailyLog,
     logs,
     addFood,
@@ -44,7 +44,7 @@ function App() {
 
   const { goals, updateGoals } = useGoals();
 
-  const toggleFavorite = (food: { name: string; calories: number; protein: number; fat: number; carbs: number; servingSize: number }) => {
+  const toggleFavorite = (food: FavoriteFoodData) => {
     if (isFavorite(food.name)) {
       removeFavorite(food.name);
     } else {
@@ -77,11 +77,11 @@ function App() {
 
           <DailySummary totals={totals} goals={goals} onUpdateGoals={updateGoals} />
 
-          <FoodSearch onAdd={addFood} onToggleFavorite={toggleFavorite} isFavorite={isFavorite} />
+          <FoodSearch onAdd={(mealType, food) => addFood(mealType, food, dateStr)} onToggleFavorite={toggleFavorite} isFavorite={isFavorite} />
 
           <Favorites
             favorites={favorites}
-            onAdd={addFood}
+            onAdd={(mealType, food) => addFood(mealType, food, dateStr)}
             onRemoveFavorite={removeFavorite}
             toFoodItem={toFoodItem}
           />
@@ -92,7 +92,7 @@ function App() {
                 key={type}
                 mealType={type}
                 foods={dailyLog.meals[type]}
-                onRemove={foodId => removeFood(type, foodId)}
+                onRemove={foodId => removeFood(type, foodId, dateStr)}
               />
             ))}
           </div>

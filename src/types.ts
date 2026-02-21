@@ -1,10 +1,19 @@
 export type MealType = 'breakfast' | 'lunch' | 'dinner' | 'snack';
 
+export const MEAL_ORDER: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
+
 export const MEAL_LABELS: Record<MealType, string> = {
   breakfast: '朝食',
   lunch: '昼食',
   dinner: '夕食',
   snack: '間食',
+};
+
+export const MEAL_ICONS: Record<MealType, string> = {
+  breakfast: '🌅',
+  lunch: '☀️',
+  dinner: '🌙',
+  snack: '🍪',
 };
 
 export interface FoodItem {
@@ -17,14 +26,16 @@ export interface FoodItem {
   servingSize: number;
 }
 
-export interface MealEntry {
-  mealType: MealType;
-  foods: FoodItem[];
-}
-
 export interface DailyLog {
   date: string; // YYYY-MM-DD
   meals: Record<MealType, FoodItem[]>;
+}
+
+export interface NutritionGoals {
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
 }
 
 export interface FavoriteFoodData {

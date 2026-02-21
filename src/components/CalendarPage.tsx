@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
-import { DailyLog, MealType, MEAL_LABELS, FoodItem } from '../types';
+import { MEAL_ORDER, MEAL_ICONS, MEAL_LABELS } from '../types';
+import type { DailyLog, FoodItem } from '../types';
 import { MonthlyCalendar } from './MonthlyCalendar';
 import { WeeklyChart } from './WeeklyChart';
+import { formatDate } from '../lib/utils';
 import './CalendarPage.css';
 
 interface Props {
@@ -9,22 +11,6 @@ interface Props {
   logs: Record<string, DailyLog>;
   onSelectDate: (date: Date) => void;
   calorieGoal?: number;
-}
-
-const MEAL_ORDER: MealType[] = ['breakfast', 'lunch', 'dinner', 'snack'];
-
-const MEAL_ICONS: Record<MealType, string> = {
-  breakfast: '🌅',
-  lunch: '☀️',
-  dinner: '🌙',
-  snack: '🍪',
-};
-
-function formatDate(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
 }
 
 export function CalendarPage({ selectedDate, logs, onSelectDate, calorieGoal }: Props) {

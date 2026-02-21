@@ -6,7 +6,7 @@ import {
   Unsubscribe,
 } from 'firebase/firestore';
 import { db } from '../firebase';
-import { DailyLog, FavoriteFoodData } from '../types';
+import type { DailyLog, FavoriteFoodData, NutritionGoals } from '../types';
 
 // --- Meal Logs ---
 
@@ -53,13 +53,6 @@ export async function setFavorites(uid: string, favorites: FavoriteFoodData[]): 
 }
 
 // --- Goals ---
-
-export interface NutritionGoals {
-  calories: number;
-  protein: number;
-  fat: number;
-  carbs: number;
-}
 
 export function subscribeGoals(
   uid: string,

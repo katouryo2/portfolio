@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NutritionGoals } from '../hooks/useGoals';
+import type { NutritionGoals } from '../types';
 import './DailySummary.css';
 
 interface Props {
@@ -127,10 +127,11 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
           <div className="daily-summary__modal" onClick={e => e.stopPropagation()}>
             <h4 className="daily-summary__modal-title">1日の目標を設定</h4>
             <div className="daily-summary__modal-fields">
-              <label>
-                <span>カロリー</span>
+              <div>
+                <label htmlFor="goal-calories">カロリー</label>
                 <div className="daily-summary__modal-input-wrap">
                   <input
+                    id="goal-calories"
                     type="number"
                     value={draft.calories}
                     min={0}
@@ -138,11 +139,12 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                   />
                   <span className="daily-summary__modal-unit">kcal</span>
                 </div>
-              </label>
-              <label>
-                <span>タンパク質</span>
+              </div>
+              <div>
+                <label htmlFor="goal-protein">タンパク質</label>
                 <div className="daily-summary__modal-input-wrap">
                   <input
+                    id="goal-protein"
                     type="number"
                     value={draft.protein}
                     min={0}
@@ -150,11 +152,12 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
-              </label>
-              <label>
-                <span>脂質</span>
+              </div>
+              <div>
+                <label htmlFor="goal-fat">脂質</label>
                 <div className="daily-summary__modal-input-wrap">
                   <input
+                    id="goal-fat"
                     type="number"
                     value={draft.fat}
                     min={0}
@@ -162,11 +165,12 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
-              </label>
-              <label>
-                <span>炭水化物</span>
+              </div>
+              <div>
+                <label htmlFor="goal-carbs">炭水化物</label>
                 <div className="daily-summary__modal-input-wrap">
                   <input
+                    id="goal-carbs"
                     type="number"
                     value={draft.carbs}
                     min={0}
@@ -174,7 +178,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
-              </label>
+              </div>
             </div>
             <div className="daily-summary__modal-actions">
               <button className="daily-summary__modal-cancel" onClick={() => setEditing(false)}>

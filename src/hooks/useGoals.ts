@@ -1,8 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
+import type { NutritionGoals } from '../types';
 import { useAuth } from '../contexts/AuthContext';
-import { subscribeGoals, setGoals as setFirestoreGoals, NutritionGoals } from '../lib/firestoreService';
-
-export type { NutritionGoals };
+import { subscribeGoals, setGoals as setFirestoreGoals } from '../lib/firestoreService';
 
 const STORAGE_KEY = 'calorie-tracker-goals';
 
@@ -28,10 +27,7 @@ export function useGoals() {
   const [goals, setGoals] = useState<NutritionGoals>(isGuest ? loadGoalsLocal : () => DEFAULT_GOALS);
 
   useEffect(() => {
-    if (isGuest || !user) {
-      setGoals(loadGoalsLocal());
-      return;
-    }
+    if (isGuest || !user) return;
     const unsubscribe = subscribeGoals(user.uid, (firestoreGoals) => {
       setGoals(firestoreGoals);
     }, DEFAULT_GOALS);

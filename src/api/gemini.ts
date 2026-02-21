@@ -1,5 +1,5 @@
 import { DailyLog, MEAL_LABELS, MealType } from '../types';
-import { NutritionGoals } from '../hooks/useGoals';
+import type { NutritionGoals } from '../types';
 
 const API_URL = '/api/gemini';
 

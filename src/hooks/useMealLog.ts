@@ -1,16 +1,10 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { DailyLog, FoodItem, MealType } from '../types';
+import type { DailyLog, FoodItem, MealType } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import { subscribeLogs, setDailyLog } from '../lib/firestoreService';
+import { formatDate } from '../lib/utils';
 
 const STORAGE_KEY = 'calorie-tracker-logs';
-
-function formatDate(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
 
 function loadLogsLocal(): Record<string, DailyLog> {
   try {
@@ -35,12 +29,8 @@ export function useMealLog() {
   const [logs, setLogs] = useState<Record<string, DailyLog>>(isGuest ? loadLogsLocal : () => ({}));
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
-  // Firestore subscription for members
   useEffect(() => {
-    if (isGuest || !user) {
-      setLogs(loadLogsLocal());
-      return;
-    }
+    if (isGuest || !user) return;
     const unsubscribe = subscribeLogs(user.uid, (firestoreLogs) => {
       setLogs(firestoreLogs);
     });
@@ -50,9 +40,9 @@ export function useMealLog() {
   const dateStr = formatDate(selectedDate);
   const dailyLog = logs[dateStr] || emptyDailyLog(dateStr);
 
-  const addFood = useCallback((mealType: MealType, food: FoodItem) => {
+  const addFood = useCallback((mealType: MealType, food: FoodItem, targetDate: string) => {
     setLogs(prev => {
-      const log = prev[dateStr] || emptyDailyLog(dateStr);
+      const log = prev[targetDate] || emptyDailyLog(targetDate);
       const updated: DailyLog = {
         ...log,
         meals: {
@@ -60,21 +50,21 @@ export function useMealLog() {
           [mealType]: [...log.meals[mealType], food],
         },
       };
-      const next = { ...prev, [dateStr]: updated };
+      const next = { ...prev, [targetDate]: updated };
 
       if (isGuest) {
         saveLogsLocal(next);
       } else if (user) {
-        setDailyLog(user.uid, dateStr, updated);
+        setDailyLog(user.uid, targetDate, updated);
       }
 
       return next;
     });
-  }, [dateStr, isGuest, user]);
+  }, [isGuest, user]);
 
-  const removeFood = useCallback((mealType: MealType, foodId: string) => {
+  const removeFood = useCallback((mealType: MealType, foodId: string, targetDate: string) => {
     setLogs(prev => {
-      const log = prev[dateStr];
+      const log = prev[targetDate];
       if (!log) return prev;
       const updated: DailyLog = {
         ...log,
@@ -83,17 +73,17 @@ export function useMealLog() {
           [mealType]: log.meals[mealType].filter(f => f.id !== foodId),
         },
       };
-      const next = { ...prev, [dateStr]: updated };
+      const next = { ...prev, [targetDate]: updated };
 
       if (isGuest) {
         saveLogsLocal(next);
       } else if (user) {
-        setDailyLog(user.uid, dateStr, updated);
+        setDailyLog(user.uid, targetDate, updated);
       }
 
       return next;
     });
-  }, [dateStr, isGuest, user]);
+  }, [isGuest, user]);
 
   const totals = useMemo(() => {
     const allFoods = Object.values(dailyLog.meals).flat();

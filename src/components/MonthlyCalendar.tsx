@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
-import { DailyLog, FoodItem } from '../types';
+import { DailyLog } from '../types';
+import { formatDate, getDayCalories } from '../lib/utils';
 import './MonthlyCalendar.css';
 
 interface Props {
@@ -10,17 +11,6 @@ interface Props {
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
 
-function formatDateKey(year: number, month: number, day: number): string {
-  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-}
-
-function getDayCalories(log: DailyLog | undefined): number {
-  if (!log) return 0;
-  return Object.values(log.meals)
-    .flat()
-    .reduce((sum: number, f: FoodItem) => sum + f.calories, 0);
-}
-
 function isSameDay(a: Date, b: Date): boolean {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 }
@@ -29,7 +19,7 @@ export function MonthlyCalendar({ selectedDate, logs, onSelectDate }: Props) {
   const [viewYear, setViewYear] = useState(selectedDate.getFullYear());
   const [viewMonth, setViewMonth] = useState(selectedDate.getMonth());
 
-  const today = useMemo(() => new Date(), []);
+  const today = new Date();
 
   const cells = useMemo(() => {
     const firstDay = new Date(viewYear, viewMonth, 1).getDay();
@@ -80,7 +70,7 @@ export function MonthlyCalendar({ selectedDate, logs, onSelectDate }: Props) {
         {cells.map((day, i) => {
           if (day === null) return <div key={`empty-${i}`} className="calendar__cell calendar__cell--empty" />;
 
-          const dateKey = formatDateKey(viewYear, viewMonth, day);
+          const dateKey = formatDate(new Date(viewYear, viewMonth, day));
           const cal = getDayCalories(logs[dateKey]);
           const cellDate = new Date(viewYear, viewMonth, day);
           const isSelected = isSameDay(cellDate, selectedDate);
