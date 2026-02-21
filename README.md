@@ -4,8 +4,12 @@ React + TypeScript で構築したカロリー管理アプリケーションで�
 
 ## デモ
 
-https://vite-project-git-feature-calorie-tracker-katouryos-projects.vercel.app/
+[https://vite-project-git-feature-calorie-tracker-katouryos-projects.vercel.app/
+](https://vite-project-git-main-katouryos-projects.vercel.app/)
 
+ ## 仕様書
+ https://docs.google.com/spreadsheets/d/1ccMZHMs-OJSDm_thM5PBjlOQlM-IUWMKfy-SvQc41II/edit?usp=sharing
+ 
 ## ホーム画面
 
 <img width="1470" height="956" alt="ホーム画面" src="https://github.com/user-attachments/assets/ab65ca94-d405-4edb-9888-f63c7353fd11" />
