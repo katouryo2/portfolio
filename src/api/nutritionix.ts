@@ -1,17 +1,9 @@
 import { FoodItem, CalorieNinjasFood } from '../types';
 import { translateQuery, containsJapanese, addDefaultServing } from './foodDictionary';
 
-const API_URL = import.meta.env.DEV
-  ? '/api/nutrition'
-  : 'https://api.calorieninjas.com/v1/nutrition';
+const API_URL = '/api/nutrition';
 
 export async function searchFood(query: string): Promise<FoodItem[]> {
-  const apiKey = import.meta.env.VITE_CALORIENINJAS_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('API キーが未設定です。.env に VITE_CALORIENINJAS_API_KEY を設定してください');
-  }
-
   const originalQuery = query.trim();
   let apiQuery = originalQuery;
 
@@ -34,11 +26,7 @@ export async function searchFood(query: string): Promise<FoodItem[]> {
     apiQuery = addDefaultServing(apiQuery);
   }
 
-  const res = await fetch(`${API_URL}?query=${encodeURIComponent(apiQuery)}`, {
-    headers: {
-      'X-Api-Key': apiKey,
-    },
-  });
+  const res = await fetch(`${API_URL}?query=${encodeURIComponent(apiQuery)}`);
 
   if (!res.ok) {
     throw new Error(`API エラー: ${res.status}`);

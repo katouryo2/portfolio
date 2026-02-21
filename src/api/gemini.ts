@@ -1,9 +1,7 @@
 import { DailyLog, MEAL_LABELS, MealType } from '../types';
 import { NutritionGoals } from '../hooks/useGoals';
 
-const API_URL = import.meta.env.DEV
-  ? '/api/gemini'
-  : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+const API_URL = '/api/gemini';
 
 function buildPrompt(dailyLog: DailyLog, totals: { calories: number; protein: number; fat: number; carbs: number }, goals: NutritionGoals): string {
   const mealSummary = (Object.keys(MEAL_LABELS) as MealType[])
@@ -40,15 +38,9 @@ export async function getAiAdvice(
   totals: { calories: number; protein: number; fat: number; carbs: number },
   goals: NutritionGoals
 ): Promise<string> {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('Gemini API キーが未設定です。.env に VITE_GEMINI_API_KEY を設定してください');
-  }
-
   const prompt = buildPrompt(dailyLog, totals, goals);
 
-  const res = await fetch(`${API_URL}?key=${encodeURIComponent(apiKey)}`, {
+  const res = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
