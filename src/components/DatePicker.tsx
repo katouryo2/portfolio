@@ -29,7 +29,7 @@ export function DatePicker({ date, onPrev, onNext, onChange }: Props) {
           type="date"
           className="date-picker__input"
           value={date.toISOString().split('T')[0]}
-          onChange={e => {
+          onChange={(e) => {
             const d = new Date(e.target.value + 'T00:00:00');
             if (!isNaN(d.getTime())) onChange(d);
           }}

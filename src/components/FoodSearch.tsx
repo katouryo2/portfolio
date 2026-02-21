@@ -42,7 +42,7 @@ export function FoodSearch({ onAdd, onToggleFavorite, isFavorite }: Props) {
 
   const handleAdd = (food: FoodItem) => {
     onAdd(selectedMeal, food);
-    setResults(prev => prev.filter(f => f.id !== food.id));
+    setResults((prev) => prev.filter((f) => f.id !== food.id));
   };
 
   return (
@@ -53,7 +53,7 @@ export function FoodSearch({ onAdd, onToggleFavorite, isFavorite }: Props) {
           className="food-search__input"
           placeholder="食品を入力（例: rice 200g, banana）"
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
         <button className="food-search__btn" type="submit" disabled={loading}>
           {loading ? '検索中...' : '検索'}
@@ -62,7 +62,7 @@ export function FoodSearch({ onAdd, onToggleFavorite, isFavorite }: Props) {
 
       <div className="food-search__actions">
         <div className="food-search__meal-select">
-          {(Object.keys(MEAL_LABELS) as MealType[]).map(type => (
+          {(Object.keys(MEAL_LABELS) as MealType[]).map((type) => (
             <button
               key={type}
               className={`food-search__meal-btn ${selectedMeal === type ? 'active' : ''}`}
@@ -74,7 +74,7 @@ export function FoodSearch({ onAdd, onToggleFavorite, isFavorite }: Props) {
         </div>
         <button
           className={`food-search__manual-btn ${showManual ? 'active' : ''}`}
-          onClick={() => setShowManual(v => !v)}
+          onClick={() => setShowManual((v) => !v)}
           type="button"
         >
           &#9998; 手動入力
@@ -98,14 +98,12 @@ export function FoodSearch({ onAdd, onToggleFavorite, isFavorite }: Props) {
 
       {results.length > 0 && (
         <ul className="food-search__results">
-          {results.map(food => (
+          {results.map((food) => (
             <li key={food.id} className="food-search__result">
               <div className="food-search__result-info">
                 <div>
                   <span className="food-search__result-name">{food.name}</span>
-                  <span className="food-search__result-serving">
-                    {food.servingSize}g
-                  </span>
+                  <span className="food-search__result-serving">{food.servingSize}g</span>
                 </div>
               </div>
               <div className="food-search__result-nutrients">

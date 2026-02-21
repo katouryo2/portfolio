@@ -7,24 +7,24 @@
 }
 
 :root {
-  --primary: #007AFF;
-  --primary-dark: #0055CC;
+  --primary: #007aff;
+  --primary-dark: #0055cc;
   --primary-light: rgba(0, 122, 255, 0.1);
-  --primary-gradient: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
-  --success: #34C759;
-  --success-dark: #248A3D;
-  --danger: #FF3B30;
+  --primary-gradient: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+  --success: #34c759;
+  --success-dark: #248a3d;
+  --danger: #ff3b30;
   --danger-light: rgba(255, 59, 48, 0.08);
-  --protein: #32ADE6;
-  --fat: #FF9F0A;
-  --carbs: #AF52DE;
-  --favorite: #FFD60A;
+  --protein: #32ade6;
+  --fat: #ff9f0a;
+  --carbs: #af52de;
+  --favorite: #ffd60a;
 
   /* Meal type accent colors */
-  --breakfast: #FF9F0A;
-  --lunch: #34C759;
-  --dinner: #5856D6;
-  --snack: #FF2D55;
+  --breakfast: #ff9f0a;
+  --lunch: #34c759;
+  --dinner: #5856d6;
+  --snack: #ff2d55;
 
   /* Glassmorphism */
   --glass: rgba(255, 255, 255, 0.55);
@@ -33,7 +33,7 @@
   --glass-blur: blur(20px) saturate(180%);
 
   --bg: #f2f2f7;
-  --bg-gradient: linear-gradient(135deg, #E8F0FE 0%, #F5F0FF 50%, #FEF0F0 100%);
+  --bg-gradient: linear-gradient(135deg, #e8f0fe 0%, #f5f0ff 50%, #fef0f0 100%);
   --surface: #ffffff;
   --surface-hover: rgba(0, 0, 0, 0.03);
   --border: rgba(0, 0, 0, 0.06);
@@ -48,7 +48,9 @@
   --radius-sm: 14px;
   --radius-xs: 10px;
 
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Hiragino Sans',
+    'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: var(--text);
@@ -66,7 +68,7 @@
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 
     --bg: #000000;
-    --bg-gradient: linear-gradient(135deg, #0D0D1F 0%, #151530 50%, #1F0D1F 100%);
+    --bg-gradient: linear-gradient(135deg, #0d0d1f 0%, #151530 50%, #1f0d1f 100%);
     --surface: #2c2c2e;
     --surface-hover: rgba(255, 255, 255, 0.08);
     --border: rgba(255, 255, 255, 0.12);

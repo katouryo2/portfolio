@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import type { DailyLog, FoodItem, MealType } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import { subscribeLogs, setDailyLog } from '../lib/firestoreService';
-import { formatDate } from '../lib/utils';
+import { formatDate, calculateTotals } from '../lib/utils';
 
 const STORAGE_KEY = 'calorie-tracker-logs';
 
@@ -40,63 +40,61 @@ export function useMealLog() {
   const dateStr = formatDate(selectedDate);
   const dailyLog = logs[dateStr] || emptyDailyLog(dateStr);
 
-  const addFood = useCallback((mealType: MealType, food: FoodItem, targetDate: string) => {
-    setLogs(prev => {
-      const log = prev[targetDate] || emptyDailyLog(targetDate);
-      const updated: DailyLog = {
-        ...log,
-        meals: {
-          ...log.meals,
-          [mealType]: [...log.meals[mealType], food],
-        },
-      };
-      const next = { ...prev, [targetDate]: updated };
+  const addFood = useCallback(
+    (mealType: MealType, food: FoodItem, targetDate: string) => {
+      setLogs((prev) => {
+        const log = prev[targetDate] || emptyDailyLog(targetDate);
+        const updated: DailyLog = {
+          ...log,
+          meals: {
+            ...log.meals,
+            [mealType]: [...log.meals[mealType], food],
+          },
+        };
+        const next = { ...prev, [targetDate]: updated };
 
-      if (isGuest) {
-        saveLogsLocal(next);
-      } else if (user) {
-        setDailyLog(user.uid, targetDate, updated);
-      }
+        if (isGuest) {
+          saveLogsLocal(next);
+        } else if (user) {
+          setDailyLog(user.uid, targetDate, updated);
+        }
 
-      return next;
-    });
-  }, [isGuest, user]);
+        return next;
+      });
+    },
+    [isGuest, user],
+  );
 
-  const removeFood = useCallback((mealType: MealType, foodId: string, targetDate: string) => {
-    setLogs(prev => {
-      const log = prev[targetDate];
-      if (!log) return prev;
-      const updated: DailyLog = {
-        ...log,
-        meals: {
-          ...log.meals,
-          [mealType]: log.meals[mealType].filter(f => f.id !== foodId),
-        },
-      };
-      const next = { ...prev, [targetDate]: updated };
+  const removeFood = useCallback(
+    (mealType: MealType, foodId: string, targetDate: string) => {
+      setLogs((prev) => {
+        const log = prev[targetDate];
+        if (!log) return prev;
+        const updated: DailyLog = {
+          ...log,
+          meals: {
+            ...log.meals,
+            [mealType]: log.meals[mealType].filter((f) => f.id !== foodId),
+          },
+        };
+        const next = { ...prev, [targetDate]: updated };
 
-      if (isGuest) {
-        saveLogsLocal(next);
-      } else if (user) {
-        setDailyLog(user.uid, targetDate, updated);
-      }
+        if (isGuest) {
+          saveLogsLocal(next);
+        } else if (user) {
+          setDailyLog(user.uid, targetDate, updated);
+        }
 
-      return next;
-    });
-  }, [isGuest, user]);
+        return next;
+      });
+    },
+    [isGuest, user],
+  );
 
-  const totals = useMemo(() => {
-    const allFoods = Object.values(dailyLog.meals).flat();
-    return {
-      calories: allFoods.reduce((sum, f) => sum + f.calories, 0),
-      protein: Math.round(allFoods.reduce((sum, f) => sum + f.protein, 0) * 10) / 10,
-      fat: Math.round(allFoods.reduce((sum, f) => sum + f.fat, 0) * 10) / 10,
-      carbs: Math.round(allFoods.reduce((sum, f) => sum + f.carbs, 0) * 10) / 10,
-    };
-  }, [dailyLog]);
+  const totals = useMemo(() => calculateTotals(dailyLog), [dailyLog]);
 
   const goToPrevDay = useCallback(() => {
-    setSelectedDate(prev => {
+    setSelectedDate((prev) => {
       const d = new Date(prev);
       d.setDate(d.getDate() - 1);
       return d;
@@ -104,7 +102,7 @@ export function useMealLog() {
   }, []);
 
   const goToNextDay = useCallback(() => {
-    setSelectedDate(prev => {
+    setSelectedDate((prev) => {
       const d = new Date(prev);
       d.setDate(d.getDate() + 1);
       return d;

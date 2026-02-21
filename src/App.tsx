@@ -34,13 +34,7 @@ function App() {
     goToNextDay,
   } = useMealLog();
 
-  const {
-    favorites,
-    addFavorite,
-    removeFavorite,
-    isFavorite,
-    toFoodItem,
-  } = useFavorites();
+  const { favorites, addFavorite, removeFavorite, isFavorite, toFoodItem } = useFavorites();
 
   const { goals, updateGoals } = useGoals();
 
@@ -77,7 +71,11 @@ function App() {
 
           <DailySummary totals={totals} goals={goals} onUpdateGoals={updateGoals} />
 
-          <FoodSearch onAdd={(mealType, food) => addFood(mealType, food, dateStr)} onToggleFavorite={toggleFavorite} isFavorite={isFavorite} />
+          <FoodSearch
+            onAdd={(mealType, food) => addFood(mealType, food, dateStr)}
+            onToggleFavorite={toggleFavorite}
+            isFavorite={isFavorite}
+          />
 
           <Favorites
             favorites={favorites}
@@ -87,12 +85,12 @@ function App() {
           />
 
           <div className="app__meals">
-            {MEAL_ORDER.map(type => (
+            {MEAL_ORDER.map((type) => (
               <MealSection
                 key={type}
                 mealType={type}
                 foods={dailyLog.meals[type]}
-                onRemove={foodId => removeFood(type, foodId, dateStr)}
+                onRemove={(foodId) => removeFood(type, foodId, dateStr)}
               />
             ))}
           </div>

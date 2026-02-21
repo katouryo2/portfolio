@@ -17,7 +17,7 @@ export function Favorites({ favorites, onAdd, onRemoveFavorite, toFoodItem }: Pr
 
   return (
     <div className="favorites">
-      <button className="favorites__toggle" onClick={() => setOpen(v => !v)}>
+      <button className="favorites__toggle" onClick={() => setOpen((v) => !v)}>
         <div className="favorites__header">
           <span className="favorites__icon">&#9733;</span>
           <h3 className="favorites__title">お気に入り</h3>
@@ -31,7 +31,7 @@ export function Favorites({ favorites, onAdd, onRemoveFavorite, toFoodItem }: Pr
       {open && (
         <div className="favorites__body">
           <div className="favorites__meal-select">
-            {(Object.keys(MEAL_LABELS) as MealType[]).map(type => (
+            {(Object.keys(MEAL_LABELS) as MealType[]).map((type) => (
               <button
                 key={type}
                 className={`favorites__meal-btn ${selectedMeal === type ? 'active' : ''}`}
@@ -43,7 +43,7 @@ export function Favorites({ favorites, onAdd, onRemoveFavorite, toFoodItem }: Pr
           </div>
 
           <div className="favorites__grid">
-            {favorites.map(fav => (
+            {favorites.map((fav) => (
               <div key={fav.name} className="favorites__chip">
                 <button
                   className="favorites__chip-remove"

@@ -22,9 +22,7 @@ function renderInline(text: string): ReactNode {
   const stripped = text.replace(/\*\*/g, '');
   const parts = text.split(/\*\*(.+?)\*\*/g);
   if (parts.length <= 1) return stripped;
-  return parts.map((part, i) =>
-    i % 2 === 1 ? <strong key={i}>{part}</strong> : part,
-  );
+  return parts.map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part));
 }
 
 /** Markdown テキストをブロック単位にパースする */
@@ -77,7 +75,9 @@ function renderBlocks(blocks: Block[]): ReactNode[] {
         return (
           <ul key={i} className="ai-advice__list">
             {block.lines.map((line, j) => (
-              <li key={j} className="ai-advice__list-item">{renderInline(line)}</li>
+              <li key={j} className="ai-advice__list-item">
+                {renderInline(line)}
+              </li>
             ))}
           </ul>
         );
@@ -85,7 +85,9 @@ function renderBlocks(blocks: Block[]): ReactNode[] {
         return (
           <ol key={i} className="ai-advice__list">
             {block.lines.map((line, j) => (
-              <li key={j} className="ai-advice__list-item">{renderInline(line)}</li>
+              <li key={j} className="ai-advice__list-item">
+                {renderInline(line)}
+              </li>
             ))}
           </ol>
         );
@@ -106,7 +108,7 @@ export function AiAdvice({ dailyLog, totals, goals }: Props) {
     setLoading(false);
   }, [dailyLog.date]);
 
-  const hasAnyFood = Object.values(dailyLog.meals).some(foods => foods.length > 0);
+  const hasAnyFood = Object.values(dailyLog.meals).some((foods) => foods.length > 0);
 
   const handleAsk = async () => {
     setLoading(true);
@@ -136,11 +138,7 @@ export function AiAdvice({ dailyLog, totals, goals }: Props) {
           <p className="ai-advice__description">
             今日の食事記録をAIが分析し、栄養バランスの評価と明日のおすすめメニューを提案します。
           </p>
-          <button
-            className="ai-advice__btn"
-            onClick={handleAsk}
-            disabled={!hasAnyFood}
-          >
+          <button className="ai-advice__btn" onClick={handleAsk} disabled={!hasAnyFood}>
             {hasAnyFood ? 'AIに聞いてみる' : '食事を記録してから利用できます'}
           </button>
         </div>
@@ -164,9 +162,7 @@ export function AiAdvice({ dailyLog, totals, goals }: Props) {
 
       {advice && (
         <div className="ai-advice__content">
-          <div className="ai-advice__text">
-            {renderBlocks(parseBlocks(advice))}
-          </div>
+          <div className="ai-advice__text">{renderBlocks(parseBlocks(advice))}</div>
           <button className="ai-advice__btn ai-advice__btn--refresh" onClick={handleAsk}>
             &#128260; もう一度聞く
           </button>

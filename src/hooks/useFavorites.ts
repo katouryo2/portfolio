@@ -21,7 +21,9 @@ function saveFavoritesLocal(favs: FavoriteFoodData[]) {
 
 export function useFavorites() {
   const { user, isGuest } = useAuth();
-  const [favorites, setFavorites] = useState<FavoriteFoodData[]>(isGuest ? loadFavoritesLocal : () => []);
+  const [favorites, setFavorites] = useState<FavoriteFoodData[]>(
+    isGuest ? loadFavoritesLocal : () => [],
+  );
 
   useEffect(() => {
     if (isGuest || !user) return;
@@ -31,38 +33,47 @@ export function useFavorites() {
     return unsubscribe;
   }, [isGuest, user]);
 
-  const addFavorite = useCallback((food: FavoriteFoodData) => {
-    setFavorites(prev => {
-      if (prev.some(f => f.name === food.name)) return prev;
-      const next = [...prev, { ...food }];
+  const addFavorite = useCallback(
+    (food: FavoriteFoodData) => {
+      setFavorites((prev) => {
+        if (prev.some((f) => f.name === food.name)) return prev;
+        const next = [...prev, { ...food }];
 
-      if (isGuest) {
-        saveFavoritesLocal(next);
-      } else if (user) {
-        setFirestoreFavorites(user.uid, next);
-      }
+        if (isGuest) {
+          saveFavoritesLocal(next);
+        } else if (user) {
+          setFirestoreFavorites(user.uid, next);
+        }
 
-      return next;
-    });
-  }, [isGuest, user]);
+        return next;
+      });
+    },
+    [isGuest, user],
+  );
 
-  const removeFavorite = useCallback((name: string) => {
-    setFavorites(prev => {
-      const next = prev.filter(f => f.name !== name);
+  const removeFavorite = useCallback(
+    (name: string) => {
+      setFavorites((prev) => {
+        const next = prev.filter((f) => f.name !== name);
 
-      if (isGuest) {
-        saveFavoritesLocal(next);
-      } else if (user) {
-        setFirestoreFavorites(user.uid, next);
-      }
+        if (isGuest) {
+          saveFavoritesLocal(next);
+        } else if (user) {
+          setFirestoreFavorites(user.uid, next);
+        }
 
-      return next;
-    });
-  }, [isGuest, user]);
+        return next;
+      });
+    },
+    [isGuest, user],
+  );
 
-  const isFavorite = useCallback((name: string) => {
-    return favorites.some(f => f.name === name);
-  }, [favorites]);
+  const isFavorite = useCallback(
+    (name: string) => {
+      return favorites.some((f) => f.name === name);
+    },
+    [favorites],
+  );
 
   const toFoodItem = useCallback((fav: FavoriteFoodData): FoodItem => {
     return { ...fav, id: crypto.randomUUID() };

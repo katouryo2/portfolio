@@ -3,12 +3,16 @@ import type { NutritionGoals } from '../types';
 
 const API_URL = '/api/gemini';
 
-function buildPrompt(dailyLog: DailyLog, totals: { calories: number; protein: number; fat: number; carbs: number }, goals: NutritionGoals): string {
+function buildPrompt(
+  dailyLog: DailyLog,
+  totals: { calories: number; protein: number; fat: number; carbs: number },
+  goals: NutritionGoals,
+): string {
   const mealSummary = (Object.keys(MEAL_LABELS) as MealType[])
-    .map(type => {
+    .map((type) => {
       const foods = dailyLog.meals[type];
       if (foods.length === 0) return `${MEAL_LABELS[type]}: なし`;
-      const items = foods.map(f => `${f.name}(${f.calories}kcal)`).join('、');
+      const items = foods.map((f) => `${f.name}(${f.calories}kcal)`).join('、');
       return `${MEAL_LABELS[type]}: ${items}`;
     })
     .join('\n');
@@ -36,7 +40,7 @@ ${mealSummary}
 export async function getAiAdvice(
   dailyLog: DailyLog,
   totals: { calories: number; protein: number; fat: number; carbs: number },
-  goals: NutritionGoals
+  goals: NutritionGoals,
 ): Promise<string> {
   const prompt = buildPrompt(dailyLog, totals, goals);
 

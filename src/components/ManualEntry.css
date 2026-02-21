@@ -62,9 +62,15 @@
   margin-bottom: 0.2rem;
 }
 
-.manual-entry__label--protein { color: var(--protein); }
-.manual-entry__label--fat { color: var(--fat); }
-.manual-entry__label--carbs { color: var(--carbs); }
+.manual-entry__label--protein {
+  color: var(--protein);
+}
+.manual-entry__label--fat {
+  color: var(--fat);
+}
+.manual-entry__label--carbs {
+  color: var(--carbs);
+}
 
 .manual-entry__required {
   color: var(--danger);
@@ -107,13 +113,13 @@
   pointer-events: none;
 }
 
-.manual-entry__input[type="number"]::-webkit-inner-spin-button,
-.manual-entry__input[type="number"]::-webkit-outer-spin-button {
+.manual-entry__input[type='number']::-webkit-inner-spin-button,
+.manual-entry__input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.manual-entry__input[type="number"] {
+.manual-entry__input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -174,6 +180,12 @@
 }
 
 @keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

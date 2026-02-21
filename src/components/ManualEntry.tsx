@@ -56,7 +56,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
             className="manual-entry__input"
             placeholder="例: おにぎり（鮭）"
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -72,7 +72,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
                 placeholder="0"
                 min="0"
                 value={calories}
-                onChange={e => setCalories(e.target.value)}
+                onChange={(e) => setCalories(e.target.value)}
               />
               <span className="manual-entry__unit">kcal</span>
             </div>
@@ -87,7 +87,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
                 placeholder="0"
                 min="0"
                 value={servingSize}
-                onChange={e => setServingSize(e.target.value)}
+                onChange={(e) => setServingSize(e.target.value)}
               />
               <span className="manual-entry__unit">g</span>
             </div>
@@ -105,7 +105,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
                 min="0"
                 step="0.1"
                 value={protein}
-                onChange={e => setProtein(e.target.value)}
+                onChange={(e) => setProtein(e.target.value)}
               />
               <span className="manual-entry__unit">g</span>
             </div>
@@ -121,7 +121,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
                 min="0"
                 step="0.1"
                 value={fat}
-                onChange={e => setFat(e.target.value)}
+                onChange={(e) => setFat(e.target.value)}
               />
               <span className="manual-entry__unit">g</span>
             </div>
@@ -137,7 +137,7 @@ export function ManualEntry({ selectedMeal, onAdd, onClose, onToggleFavorite, is
                 min="0"
                 step="0.1"
                 value={carbs}
-                onChange={e => setCarbs(e.target.value)}
+                onChange={(e) => setCarbs(e.target.value)}
               />
               <span className="manual-entry__unit">g</span>
             </div>

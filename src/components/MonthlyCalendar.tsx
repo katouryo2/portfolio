@@ -12,7 +12,11 @@ interface Props {
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
 
 function isSameDay(a: Date, b: Date): boolean {
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
 }
 
 export function MonthlyCalendar({ selectedDate, logs, onSelectDate }: Props) {
@@ -32,19 +36,19 @@ export function MonthlyCalendar({ selectedDate, logs, onSelectDate }: Props) {
 
   const goToPrevMonth = () => {
     if (viewMonth === 0) {
-      setViewYear(y => y - 1);
+      setViewYear((y) => y - 1);
       setViewMonth(11);
     } else {
-      setViewMonth(m => m - 1);
+      setViewMonth((m) => m - 1);
     }
   };
 
   const goToNextMonth = () => {
     if (viewMonth === 11) {
-      setViewYear(y => y + 1);
+      setViewYear((y) => y + 1);
       setViewMonth(0);
     } else {
-      setViewMonth(m => m + 1);
+      setViewMonth((m) => m + 1);
     }
   };
 
@@ -55,20 +59,27 @@ export function MonthlyCalendar({ selectedDate, logs, onSelectDate }: Props) {
   return (
     <div className="calendar">
       <div className="calendar__header">
-        <button className="calendar__nav-btn" onClick={goToPrevMonth}>‹</button>
+        <button className="calendar__nav-btn" onClick={goToPrevMonth}>
+          ‹
+        </button>
         <span className="calendar__month-label">
           {viewYear}年{viewMonth + 1}月
         </span>
-        <button className="calendar__nav-btn" onClick={goToNextMonth}>›</button>
+        <button className="calendar__nav-btn" onClick={goToNextMonth}>
+          ›
+        </button>
       </div>
 
       <div className="calendar__grid">
-        {WEEKDAYS.map(w => (
-          <div key={w} className="calendar__weekday">{w}</div>
+        {WEEKDAYS.map((w) => (
+          <div key={w} className="calendar__weekday">
+            {w}
+          </div>
         ))}
 
         {cells.map((day, i) => {
-          if (day === null) return <div key={`empty-${i}`} className="calendar__cell calendar__cell--empty" />;
+          if (day === null)
+            return <div key={`empty-${i}`} className="calendar__cell calendar__cell--empty" />;
 
           const dateKey = formatDate(new Date(viewYear, viewMonth, day));
           const cal = getDayCalories(logs[dateKey]);

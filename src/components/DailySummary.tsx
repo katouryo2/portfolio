@@ -28,14 +28,13 @@ function NutrientBar({ label, value, max, unit, color }: NutrientBarProps) {
       <div className="nutrient-bar__label">
         <span>{label}</span>
         <span>
-          {value}{unit} / {max}{unit}
+          {value}
+          {unit} / {max}
+          {unit}
         </span>
       </div>
       <div className="nutrient-bar__track">
-        <div
-          className="nutrient-bar__fill"
-          style={{ width: `${pct}%`, background: color }}
-        />
+        <div className="nutrient-bar__fill" style={{ width: `${pct}%`, background: color }} />
       </div>
     </div>
   );
@@ -84,14 +83,11 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                 <stop offset="100%" stopColor="#5856D6" />
               </linearGradient>
             </defs>
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--primary)" strokeWidth="8" />
             <circle
-              cx="50" cy="50" r="42"
-              fill="none"
-              stroke="var(--primary)"
-              strokeWidth="8"
-            />
-            <circle
-              cx="50" cy="50" r="42"
+              cx="50"
+              cy="50"
+              r="42"
               fill="none"
               stroke="url(#ringGradient)"
               strokeWidth="8"
@@ -113,9 +109,27 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
 
       <div className="daily-summary__right">
         <div className="daily-summary__nutrients">
-          <NutrientBar label="タンパク質" value={totals.protein} max={goals.protein} unit="g" color="var(--protein)" />
-          <NutrientBar label="脂質" value={totals.fat} max={goals.fat} unit="g" color="var(--fat)" />
-          <NutrientBar label="炭水化物" value={totals.carbs} max={goals.carbs} unit="g" color="var(--carbs)" />
+          <NutrientBar
+            label="タンパク質"
+            value={totals.protein}
+            max={goals.protein}
+            unit="g"
+            color="var(--protein)"
+          />
+          <NutrientBar
+            label="脂質"
+            value={totals.fat}
+            max={goals.fat}
+            unit="g"
+            color="var(--fat)"
+          />
+          <NutrientBar
+            label="炭水化物"
+            value={totals.carbs}
+            max={goals.carbs}
+            unit="g"
+            color="var(--carbs)"
+          />
         </div>
         <button className="daily-summary__edit-btn" onClick={handleOpen}>
           &#9881; 目標設定
@@ -124,7 +138,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
 
       {editing && (
         <div className="daily-summary__modal-overlay" onClick={() => setEditing(false)}>
-          <div className="daily-summary__modal" onClick={e => e.stopPropagation()}>
+          <div className="daily-summary__modal" onClick={(e) => e.stopPropagation()}>
             <h4 className="daily-summary__modal-title">1日の目標を設定</h4>
             <div className="daily-summary__modal-fields">
               <div>
@@ -135,7 +149,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.calories}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, calories: e.target.value }))}
+                    onChange={(e) => setDraft((d) => ({ ...d, calories: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">kcal</span>
                 </div>
@@ -148,7 +162,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.protein}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, protein: e.target.value }))}
+                    onChange={(e) => setDraft((d) => ({ ...d, protein: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
@@ -161,7 +175,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.fat}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, fat: e.target.value }))}
+                    onChange={(e) => setDraft((d) => ({ ...d, fat: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>
@@ -174,7 +188,7 @@ export function DailySummary({ totals, goals, onUpdateGoals }: Props) {
                     type="number"
                     value={draft.carbs}
                     min={0}
-                    onChange={e => setDraft(d => ({ ...d, carbs: e.target.value }))}
+                    onChange={(e) => setDraft((d) => ({ ...d, carbs: e.target.value }))}
                   />
                   <span className="daily-summary__modal-unit">g</span>
                 </div>

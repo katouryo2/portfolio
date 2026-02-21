@@ -24,25 +24,34 @@ function loadGoalsLocal(): NutritionGoals {
 
 export function useGoals() {
   const { user, isGuest } = useAuth();
-  const [goals, setGoals] = useState<NutritionGoals>(isGuest ? loadGoalsLocal : () => DEFAULT_GOALS);
+  const [goals, setGoals] = useState<NutritionGoals>(
+    isGuest ? loadGoalsLocal : () => DEFAULT_GOALS,
+  );
 
   useEffect(() => {
     if (isGuest || !user) return;
-    const unsubscribe = subscribeGoals(user.uid, (firestoreGoals) => {
-      setGoals(firestoreGoals);
-    }, DEFAULT_GOALS);
+    const unsubscribe = subscribeGoals(
+      user.uid,
+      (firestoreGoals) => {
+        setGoals(firestoreGoals);
+      },
+      DEFAULT_GOALS,
+    );
     return unsubscribe;
   }, [isGuest, user]);
 
-  const updateGoals = useCallback((newGoals: NutritionGoals) => {
-    setGoals(newGoals);
+  const updateGoals = useCallback(
+    (newGoals: NutritionGoals) => {
+      setGoals(newGoals);
 
-    if (isGuest) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newGoals));
-    } else if (user) {
-      setFirestoreGoals(user.uid, newGoals);
-    }
-  }, [isGuest, user]);
+      if (isGuest) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newGoals));
+      } else if (user) {
+        setFirestoreGoals(user.uid, newGoals);
+      }
+    },
+    [isGuest, user],
+  );
 
   return { goals, updateGoals };
 }

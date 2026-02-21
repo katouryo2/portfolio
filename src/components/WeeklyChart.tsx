@@ -35,7 +35,7 @@ export function WeeklyChart({ selectedDate, logs, calorieGoal }: Props) {
     return result;
   }, [selectedDate, logs]);
 
-  const maxVal = Math.max(...data.map(d => d.calories), calorieGoal ?? 0, 500);
+  const maxVal = Math.max(...data.map((d) => d.calories), calorieGoal ?? 0, 500);
 
   return (
     <div className="weekly-chart">
@@ -78,12 +78,7 @@ export function WeeklyChart({ selectedDate, logs, calorieGoal }: Props) {
               }}
             />
           )}
-          <Bar
-            dataKey="calories"
-            fill="url(#barGradient)"
-            radius={[4, 4, 0, 0]}
-            maxBarSize={36}
-          />
+          <Bar dataKey="calories" fill="url(#barGradient)" radius={[4, 4, 0, 0]} maxBarSize={36} />
           <defs>
             <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#6c9fff" />

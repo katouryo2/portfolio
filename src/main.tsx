@@ -10,9 +10,7 @@ function ErrorFallback() {
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h2>エラーが発生しました</h2>
       <p>ページを再読み込みしてください。</p>
-      <button onClick={() => window.location.reload()}>
-        再読み込み
-      </button>
+      <button onClick={() => window.location.reload()}>再読み込み</button>
     </div>
   );
 }

@@ -8,8 +8,9 @@
   box-shadow: var(--glass-shadow);
   position: relative;
   overflow: hidden;
-  transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
-              box-shadow 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition:
+    transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .meal-section::before {
@@ -21,10 +22,18 @@
   height: 3px;
 }
 
-.meal-section--breakfast::before { background: var(--breakfast); }
-.meal-section--lunch::before { background: var(--lunch); }
-.meal-section--dinner::before { background: var(--dinner); }
-.meal-section--snack::before { background: var(--snack); }
+.meal-section--breakfast::before {
+  background: var(--breakfast);
+}
+.meal-section--lunch::before {
+  background: var(--lunch);
+}
+.meal-section--dinner::before {
+  background: var(--dinner);
+}
+.meal-section--snack::before {
+  background: var(--snack);
+}
 
 .meal-section:hover {
   transform: translateY(-2px);

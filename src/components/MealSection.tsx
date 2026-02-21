@@ -23,12 +23,8 @@ export function MealSection({ mealType, foods, onRemove }: Props) {
         <p className="meal-section__empty">まだ記録がありません</p>
       ) : (
         <div className="meal-section__list">
-          {foods.map(food => (
-            <FoodItemRow
-              key={food.id}
-              food={food}
-              onRemove={() => onRemove(food.id)}
-            />
+          {foods.map((food) => (
+            <FoodItemRow key={food.id} food={food} onRemove={() => onRemove(food.id)} />
           ))}
         </div>
       )}

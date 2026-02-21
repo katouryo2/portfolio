@@ -10,7 +10,9 @@ export async function searchFood(query: string): Promise<FoodItem[]> {
   if (containsJapanese(originalQuery)) {
     const { translated, success } = translateQuery(originalQuery);
     if (!success) {
-      throw new Error('この食品名は辞書に登録されていません。英語で入力するか、別の日本語名をお試しください');
+      throw new Error(
+        'この食品名は辞書に登録されていません。英語で入力するか、別の日本語名をお試しください',
+      );
     }
     apiQuery = translated;
   } else {
@@ -33,16 +35,18 @@ export async function searchFood(query: string): Promise<FoodItem[]> {
   }
 
   const data = await res.json();
-  return (data.items as CalorieNinjasFood[]).map(food =>
-    toFoodItem(food, originalQuery, containsJapanese(originalQuery))
+  return (data.items as CalorieNinjasFood[]).map((food) =>
+    toFoodItem(food, originalQuery, containsJapanese(originalQuery)),
   );
 }
 
-function toFoodItem(food: CalorieNinjasFood, originalQuery: string, wasJapanese: boolean): FoodItem {
+function toFoodItem(
+  food: CalorieNinjasFood,
+  originalQuery: string,
+  wasJapanese: boolean,
+): FoodItem {
   // 日本語入力の場合、元の入力を表示名に使う（単品の場合）
-  const displayName = wasJapanese
-    ? `${originalQuery} (${food.name})`
-    : food.name;
+  const displayName = wasJapanese ? `${originalQuery} (${food.name})` : food.name;
 
   return {
     id: crypto.randomUUID(),

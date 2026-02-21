@@ -41,7 +41,11 @@ export function AuthModal({ onClose }: Props) {
       onClose();
     } catch (err: unknown) {
       const code = (err as { code?: string }).code ?? '';
-      if (code === 'auth/user-not-found' || code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
+      if (
+        code === 'auth/user-not-found' ||
+        code === 'auth/wrong-password' ||
+        code === 'auth/invalid-credential'
+      ) {
         setError('メールアドレスまたはパスワードが正しくありません');
       } else if (code === 'auth/email-already-in-use') {
         setError('このメールアドレスは既に登録されています');
@@ -57,7 +61,7 @@ export function AuthModal({ onClose }: Props) {
 
   return (
     <div className="auth-modal__overlay" onClick={onClose}>
-      <div className="auth-modal" onClick={e => e.stopPropagation()}>
+      <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
         <button className="auth-modal__close" onClick={onClose} aria-label="閉じる">
           &#10005;
         </button>
@@ -65,13 +69,19 @@ export function AuthModal({ onClose }: Props) {
         <div className="auth-modal__tabs">
           <button
             className={`auth-modal__tab ${tab === 'login' ? 'active' : ''}`}
-            onClick={() => { setTab('login'); setError(''); }}
+            onClick={() => {
+              setTab('login');
+              setError('');
+            }}
           >
             ログイン
           </button>
           <button
             className={`auth-modal__tab ${tab === 'register' ? 'active' : ''}`}
-            onClick={() => { setTab('register'); setError(''); }}
+            onClick={() => {
+              setTab('register');
+              setError('');
+            }}
           >
             新規登録
           </button>
@@ -84,7 +94,7 @@ export function AuthModal({ onClose }: Props) {
               type="email"
               className="auth-modal__input"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
             />
@@ -96,7 +106,7 @@ export function AuthModal({ onClose }: Props) {
               type="password"
               className="auth-modal__input"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
               autoComplete={tab === 'login' ? 'current-password' : 'new-password'}
@@ -110,7 +120,7 @@ export function AuthModal({ onClose }: Props) {
                 type="password"
                 className="auth-modal__input"
                 value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 minLength={6}
                 autoComplete="new-password"
