@@ -1,247 +1,307 @@
-# カロリー計算アプリ                                                                         
-                                                                                             
-  React + TypeScript で構築したカロリー管理アプリケーションです。食品の栄養素検索、日別の食事記
-  録、AIによる栄養アドバイスなど、日々の食事管理をサポートする機能を備えています。 
+# カロリー計算アプリ
 
-  ## デモ
-  (https://vite-project-git-feature-calorie-tracker-katouryos-projects.vercel.app/)
-  
-   ## ホーム画面                                                                                            
-<img width="1470" height="956" alt="スクリーンショット 2026-02-20 19 52 14" src="https://github.com/user-attachments/assets/ab65ca94-d405-4edb-9888-f63c7353fd11" />
+React + TypeScript で構築したカロリー管理アプリケーションです。食品の栄養素検索、日別の食事記録、AIによる栄養アドバイスなど、日々の食事管理をサポートする機能を備えています。
 
- ## カレンダー画面
-<img width="1470" height="956" alt="スクリーンショット 2026-02-20 19 59 23" src="https://github.com/user-attachments/assets/50b95356-d352-46cf-a9c5-8771581a15b1" />
+## デモ
 
+https://vite-project-git-feature-calorie-tracker-katouryos-projects.vercel.app/
 
-  ## 主な機能
+## ホーム画面
 
-  - **食品検索** — CalorieNinjas API を使用した食品の栄養素検索（日本語対応）
-  - **食事記録** — 朝食・昼食・夕食・間食の4区分で食品を記録
-  - **手動入力** — API に無い食品を手動で栄養素入力
-  - **1日のサマリー** — カロリーリング＋栄養素バーで摂取状況を可視化
-  - **目標設定** — カロリー・タンパク質・脂質・炭水化物の目標値を設定
-  - **お気に入り** — よく食べる食品をお気に入り登録してワンタップ追加
-  - **カレンダー** — 月間カレンダーで過去の食事記録を確認
-  - **週間チャート** — 過去7日間のカロリー推移を棒グラフで表示
-  - **AIアドバイス** — Gemini API による栄養バランスの評価とおすすめメニュー提案
-  - **ユーザー認証** — Firebase Authentication によるログイン機能
-  - **データ同期** — ログインユーザーは Cloud Firestore でデータ永続化・リアルタイム同期
-  - **ゲストモード** — 未ログインでも localStorage でデータ保持
-  - **ダークモード** — OS設定に連動した自動切り替え
-  - **レスポンシブ対応** — モバイル・タブレット・PCに対応
+<img width="1470" height="956" alt="ホーム画面" src="https://github.com/user-attachments/assets/ab65ca94-d405-4edb-9888-f63c7353fd11" />
 
-## 画面構成                                                                                  
-                                                                                               
-  ### ホーム画面                                                                               
-                                                                                             
-  アプリのメイン画面です。食事の記録・検索・サマリー確認をすべてこの画面で行います。           
-                                                                                               
-  - **ヘッダー** — アプリタイトル、日付切り替え、ログインボタン                                
-  - **1日のサマリー** —                                                                        
-  カロリーリング（円グラフ）で摂取カロリーを可視化、タンパク質・脂質・炭水化物のプログレスバー
-  - **食品検索** — キーワード入力で CalorieNinjas API から栄養素を検索（日本語対応）
-  - **食事区分ボタン** — 朝食・昼食・夕食・間食を切り替えて食品を追加
-  - **手動入力** — API にない食品を手動で登録
-  - **お気に入り** — よく食べる食品をワンタップで追加
-  - **食事カード** — 各区分ごとの食品一覧と小計カロリーを表示
-  - **週間チャート** — 過去7日間のカロリー推移を棒グラフで表示
-  - **AIアドバイス** — Gemini API
-  が食事内容を分析し、栄養バランスの評価とおすすめメニューを提案
+## カレンダー画面
 
-  ### カレンダー画面
+<img width="1470" height="956" alt="カレンダー画面" src="https://github.com/user-attachments/assets/50b95356-d352-46cf-a9c5-8771581a15b1" />
 
-  過去の食事記録を日別に振り返る画面です。
+## 主な機能
 
-  - **月間カレンダー** — 月ごとのカレンダー表示、記録がある日にはカロリー数を表示
-  - **日付選択** — 日付をクリックすると右側に詳細パネルを表示
-  - **詳細パネル** — 選択した日の合計カロリー・P/F/C、食事区分ごとの食品一覧
+- **食品検索** — CalorieNinjas API を使用した食品の栄養素検索（日本語対応）
+- **食事記録** — 朝食・昼食・夕食・間食の4区分で食品を記録
+- **手動入力** — API に無い食品を手動で栄養素入力
+- **1日のサマリー** — カロリーリング＋栄養素バーで摂取状況を可視化
+- **目標設定** — カロリー・タンパク質・脂質・炭水化物の目標値を設定
+- **お気に入り** — よく食べる食品をお気に入り登録してワンタップ追加
+- **カレンダー** — 月間カレンダーで過去の食事記録を確認
+- **週間チャート** — 過去7日間のカロリー推移を棒グラフで表示
+- **AIアドバイス** — Gemini API による栄養バランスの評価とおすすめメニュー提案
+- **ユーザー認証** — Firebase Authentication によるログイン機能
+- **データ同期** — ログインユーザーは Cloud Firestore でデータ永続化・リアルタイム同期
+- **ゲストモード** — 未ログインでも localStorage でデータ保持
+- **ダークモード** — OS設定に連動した自動切り替え
+- **レスポンシブ対応** — モバイル・タブレット・PCに対応
 
-  ### ログインモーダル
+## 画面構成
 
-  Firebase Authentication によるユーザー認証画面です。
+### ホーム画面
 
-  - **ログイン** — メールアドレスとパスワードでログイン
-  - **新規登録** — アカウント作成フォーム
-  - **モード切替** — ログイン / 新規登録をワンクリックで切り替え
+アプリのメイン画面です。食事の記録・検索・サマリー確認をすべてこの画面で行います。
 
-  ### 目標設定モーダル
+- **ヘッダー** — アプリタイトル、日付切り替え、ログインボタン
+- **1日のサマリー** — カロリーリング（円グラフ）で摂取カロリーを可視化、タンパク質・脂質・炭水化物のプログレスバー
+- **食品検索** — キーワード入力で CalorieNinjas API から栄養素を検索（日本語対応）
+- **食事区分ボタン** — 朝食・昼食・夕食・間食を切り替えて食品を追加
+- **手動入力** — API にない食品を手動で登録
+- **お気に入り** — よく食べる食品をワンタップで追加
+- **食事カード** — 各区分ごとの食品一覧と小計カロリーを表示
+- **週間チャート** — 過去7日間のカロリー推移を棒グラフで表示
+- **AIアドバイス** — Gemini API が食事内容を分析し、栄養バランスの評価とおすすめメニューを提案
 
-  1日の栄養目標を設定する画面です。
+### カレンダー画面
 
-  - **カロリー目標** — 1日の目標カロリー（kcal）
-  - **栄養素目標** — タンパク質・脂質・炭水化物それぞれの目標値（g）
+過去の食事記録を日別に振り返る画面です。
 
-  ## 技術スタック
+- **月間カレンダー** — 月ごとのカレンダー表示、記録がある日にはカロリー数を表示
+- **日付選択** — 日付をクリックすると右側に詳細パネルを表示
+- **詳細パネル** — 選択した日の合計カロリー・P/F/C、食事区分ごとの食品一覧
 
-  | カテゴリ | 技術 |
-  |---------|------|
-  | フロントエンド | React 18, TypeScript, Vite |
-  | スタイリング | CSS（ガラスモーフィズム） |
-  | 認証 | Firebase Authentication |
-  | データベース | Cloud Firestore |
-  | グラフ | Recharts |
-  | 食品検索API | CalorieNinjas API |
-  | AI | Google Gemini API |
-  | デプロイ | Vercel |
-  
-## 使用技術                                                                                  
-                                                                                               
-  ### フロントエンド                                                                           
-                                                                                               
-  - **React** 18.2.0 – コンポーネント指向で再利用性の高いUI構築                                
-  - **TypeScript** 4.9.3 – 型安全性によるバグの早期発見と開発効率向上                          
-  - **Vite** 4.0.0 – 高速なHMRと軽量なビルドによる開発体験の向上                               
-                                                                                               
-  ### ライブラリ
+### ログインモーダル
 
-  - **Recharts** 3.7.0 – 週間カロリー推移の棒グラフ描画
-  - **Firebase** 12.9.0 – 認証（Authentication）とデータベース（Cloud Firestore）を統合管理
+Firebase Authentication によるユーザー認証画面です。
 
-  ### 認証・データベース
+- **ログイン** — メールアドレスとパスワードでログイン
+- **新規登録** — アカウント作成フォーム
+- **モード切替** — ログイン / 新規登録をワンクリックで切り替え
 
-  - **Firebase Authentication** – メールアドレス・パスワードによるユーザー認証
-  - **Cloud Firestore** – リアルタイム同期対応のNoSQLデータベースで食事記録を永続化
+### 目標設定モーダル
 
-  ### API
+1日の栄養目標を設定する画面です。
 
-  - **CalorieNinjas API** – 食品名から栄養素（カロリー・P/F/C）を検索、日本語入力にも対応
-  - **Google Gemini API** –
-  1日の食事記録をAIが分析し、栄養バランスの評価とおすすめメニューを提案
+- **カロリー目標** — 1日の目標カロリー（kcal）
+- **栄養素目標** — タンパク質・脂質・炭水化物それぞれの目標値（g）
 
-  ### スタイリング
+## 技術スタック
 
-  - **CSS（カスタムプロパティ）** – デザイントークンによるテーマ管理（ライト/ダークモード対応）
-  - **ガラスモーフィズム** – `backdrop-filter: blur()` を活用したApple風すりガラスデザイン
+| カテゴリ | 技術 |
+|---------|------|
+| フロントエンド | React 18, TypeScript, Vite |
+| スタイリング | CSS（ガラスモーフィズム） |
+| 認証 | Firebase Authentication |
+| データベース | Cloud Firestore |
+| グラフ | Recharts |
+| 食品検索API | CalorieNinjas API |
+| AI | Google Gemini API |
+| APIセキュリティ | Vercel Serverless Functions |
+| テスト | Vitest, React Testing Library |
+| コード品質 | ESLint, Prettier |
+| CI/CD | GitHub Actions |
+| エラーハンドリング | react-error-boundary |
+| デプロイ | Vercel |
 
-  ### デプロイ
+## 使用技術
 
-  - **Vercel** – CLIによる本番デプロイ、環境変数の安全な管理
+### フロントエンド
 
-  ### その他
+- **React** 18.2.0 – コンポーネント指向で再利用性の高いUI構築
+- **TypeScript** 4.9.3 – 型安全性によるバグの早期発見と開発効率向上
+- **Vite** 4.0.0 – 高速なHMRと軽量なビルドによる開発体験の向上
 
-  - **localStorage** – ブラウザ上でのデータ永続化（認証なしでも利用可能）
-  - **レスポンシブデザイン** – モバイル・タブレット・PCに対応したレイアウト
+### ライブラリ
 
-   ## セットアップ                                                                              
-                                                                                             
-  ### 1. リポジトリをクローン                                                                  
-                                                                                               
-  ```bash                                                                                      
-  git clone https://github.com/katouryo2/portfolio.git                                         
-  cd portfolio
-  ```
+- **Recharts** 3.7.0 – 週間カロリー推移の棒グラフ描画
+- **Firebase** 12.9.0 – 認証（Authentication）とデータベース（Cloud Firestore）を統合管理
+- **react-error-boundary** 6.1.1 – 宣言的なエラーバウンダリによるクラッシュ時のフォールバックUI
 
-  ### 2. 依存パッケージをインストール
+### 認証・データベース
 
-  ```bash
-  npm install
-  ```
+- **Firebase Authentication** – メールアドレス・パスワードによるユーザー認証
+- **Cloud Firestore** – リアルタイム同期対応のNoSQLデータベースで食事記録を永続化
 
-  ### 3. 環境変数ファイルを作成
+### API
 
-  プロジェクトルートに `.env` ファイルを作成してください（[環境変数](#環境変数) を参照）。
+- **CalorieNinjas API** – 食品名から栄養素（カロリー・P/F/C）を検索、日本語入力にも対応
+- **Google Gemini API** – 1日の食事記録をAIが分析し、栄養バランスの評価とおすすめメニューを提案
+- **Vercel Serverless Functions** – API キーをサーバーサイドで管理し、クライアントから隠蔽
 
-  ```bash
-  cp .env.example .env
-  ```
+### スタイリング
 
-  ### 4. 開発サーバーを起動
+- **CSS（カスタムプロパティ）** – デザイントークンによるテーマ管理（ライト/ダークモード対応）
+- **ガラスモーフィズム** – `backdrop-filter: blur()` を活用したApple風すりガラスデザイン
 
-  ```bash
-  npm run dev
-  ```
+### テスト・コード品質
 
-  ブラウザで `http://localhost:5173` を開いてください。
+- **Vitest** 4.0.18 – Vite ネイティブの高速テストランナー
+- **React Testing Library** 16.3.2 – ユーザー視点でのコンポーネント・フックテスト
+- **ESLint** 9 – TypeScript・React Hooks のルールによる静的解析
+- **Prettier** 3.8.1 – コードフォーマットの自動統一
 
-  ### 5. 本番ビルド
+### CI/CD
 
-  ```bash
-  npm run build
-  ```
+- **GitHub Actions** – push / PR 時に lint → format:check → test → build を自動実行
+- **Vercel** – main ブランチへの push で自動デプロイ
 
-  ビルド成果物は `dist/` ディレクトリに出力されます。
+### その他
 
-  ---
+- **localStorage** – ブラウザ上でのデータ永続化（認証なしでも利用可能）
+- **レスポンシブデザイン** – モバイル・タブレット・PCに対応したレイアウト
 
-  ## 環境変数
+## セットアップ
 
-  プロジェクトルートの `.env` ファイルに以下の変数を設定してください。
+### 1. リポジトリをクローン
 
-  | 変数名 | 説明 | 取得先 |
-  |--------|------|--------|
-  | `VITE_CALORIENINJAS_API_KEY` | 食品検索APIキー |
-  [CalorieNinjas](https://calorieninjas.com/) |
-  | `VITE_GEMINI_API_KEY` | AI アドバイス用APIキー | [Google AI
-  Studio](https://aistudio.google.com/) |
-  | `VITE_FIREBASE_API_KEY` | Firebase APIキー | [Firebase
-  Console](https://console.firebase.google.com/) |
-  | `VITE_FIREBASE_AUTH_DOMAIN` | Firebase Auth ドメイン | Firebase Console |
-  | `VITE_FIREBASE_PROJECT_ID` | Firebase プロジェクトID | Firebase Console |
-  | `VITE_FIREBASE_STORAGE_BUCKET` | Firebase Storage バケット | Firebase Console |
-  | `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase Sender ID | Firebase Console |
-  | `VITE_FIREBASE_APP_ID` | Firebase App ID | Firebase Console |
+```bash
+git clone https://github.com/katouryo2/portfolio.git
+cd portfolio
+```
 
-  ## ディレクトリ構成                                                                          
-                                                                                               
-  ```                                                                                          
-  src/                                                                                         
-  ├── api/                          # 外部API通信                                              
-  │   ├── nutritionix.ts            # CalorieNinjas API（食品検索）                            
-  │   ├── gemini.ts                 # Google Gemini API（AIアドバイス）                        
-  │   └── foodDictionary.ts         # 日本語→英語の食品名変換辞書                              
-  │
-  ├── components/                   # UIコンポーネント
-  │   ├── DailySummary.tsx / .css   # 1日のサマリー（カロリーリング・栄養素バー）
-  │   ├── FoodSearch.tsx / .css     # 食品検索フォーム・検索結果表示
-  │   ├── FoodItem.tsx / .css       # 食品アイテム（名前・カロリー・P/F/C）
-  │   ├── MealSection.tsx / .css    # 食事区分カード（朝食・昼食・夕食・間食）
-  │   ├── ManualEntry.tsx / .css    # 手動入力フォーム
-  │   ├── Favorites.tsx / .css      # お気に入り食品一覧
-  │   ├── DatePicker.tsx / .css     # 日付切り替え
-  │   ├── WeeklyChart.tsx / .css    # 週間カロリー棒グラフ
-  │   ├── AiAdvice.tsx / .css       # AIアドバイス表示
-  │   ├── MonthlyCalendar.tsx / .css # 月間カレンダー
-  │   ├── CalendarPage.tsx / .css   # カレンダー画面（詳細パネル付き）
-  │   ├── AuthModal.tsx / .css      # ログイン・新規登録モーダル
-  │   └── UserMenu.tsx / .css       # ユーザーメニュー（ログイン状態表示）
-  │
-  ├── contexts/                     # React Context
-  │   └── AuthContext.tsx           # 認証状態管理（Firebase Auth）
-  │
-  ├── hooks/                        # カスタムフック
-  │   ├── useMealLog.ts             # 食事記録の CRUD・日付管理
-  │   ├── useGoals.ts               # 栄養目標の取得・更新
-  │   └── useFavorites.ts           # お気に入りの追加・削除・判定
-  │
-  ├── lib/                          # ライブラリ・サービス
-  │   └── firestoreService.ts       # Firestore CRUD・リアルタイム購読
-  │
-  ├── App.tsx                       # メインコンポーネント（ページ切替・レイアウト）
-  ├── App.css                       # レイアウト・ナビゲーションスタイル
-  ├── index.css                     # デザイントークン（カラー・ガラス変数）
-  ├── main.tsx                      # エントリーポイント
-  ├── firebase.ts                   # Firebase 初期化設定
-  ├── types.ts                      # 型定義（FoodItem, DailyLog 等）
-  └── vite-env.d.ts                 # Vite 型定義
-  ```
+### 2. 依存パッケージをインストール
+
+```bash
+npm install
+```
+
+### 3. 環境変数ファイルを作成
+
+プロジェクトルートに `.env` ファイルを作成してください（[環境変数](#環境変数) を参照）。
+
+```bash
+cp .env.example .env
+```
+
+### 4. 開発サーバーを起動
+
+```bash
+npm run dev
+```
+
+ブラウザで `http://localhost:5173` を開いてください。
+
+### 5. 本番ビルド
+
+```bash
+npm run build
+```
+
+ビルド成果物は `dist/` ディレクトリに出力されます。
+
+## スクリプト一覧
+
+| コマンド | 説明 |
+|---------|------|
+| `npm run dev` | 開発サーバーを起動 |
+| `npm run build` | TypeScript コンパイル + 本番ビルド |
+| `npm run preview` | ビルド成果物をローカルでプレビュー |
+| `npm run lint` | ESLint による静的解析 |
+| `npm run format` | Prettier でコードフォーマット |
+| `npm run format:check` | フォーマットのチェック（CI用） |
+| `npm test` | テストを watch モードで実行 |
+| `npm run test:run` | テストを1回実行（CI用） |
+
+## 環境変数
+
+プロジェクトルートの `.env` ファイルに以下の変数を設定してください。
+
+### サーバーサイド（Vercel Serverless Functions）
+
+ローカル開発では `.env` に記載、本番環境では Vercel ダッシュボードの Environment Variables に設定します。
+
+| 変数名 | 説明 | 取得先 |
+|--------|------|--------|
+| `CALORIENINJAS_API_KEY` | 食品検索APIキー | [CalorieNinjas](https://calorieninjas.com/) |
+| `GEMINI_API_KEY` | AI アドバイス用APIキー | [Google AI Studio](https://aistudio.google.com/) |
+
+### クライアントサイド（Firebase）
+
+| 変数名 | 説明 | 取得先 |
+|--------|------|--------|
+| `VITE_FIREBASE_API_KEY` | Firebase APIキー | [Firebase Console](https://console.firebase.google.com/) |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Firebase Auth ドメイン | Firebase Console |
+| `VITE_FIREBASE_PROJECT_ID` | Firebase プロジェクトID | Firebase Console |
+| `VITE_FIREBASE_STORAGE_BUCKET` | Firebase Storage バケット | Firebase Console |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase Sender ID | Firebase Console |
+| `VITE_FIREBASE_APP_ID` | Firebase App ID | Firebase Console |
+
+## ディレクトリ構成
+
+### プロジェクトルート
+
+```
+.github/workflows/
+└── ci.yml                        # GitHub Actions CI（lint → test → build）
+
+api/                              # Vercel Serverless Functions
+├── nutrition.ts                  # CalorieNinjas API プロキシ
+├── gemini.ts                     # Gemini API プロキシ
+└── tsconfig.json                 # サーバーレス関数用 TypeScript 設定
+
+eslint.config.js                  # ESLint 設定（flat config）
+vitest.config.ts                  # Vitest テスト設定
+.prettierrc                       # Prettier 設定
+vite.config.ts                    # Vite 設定（開発サーバー・プロキシ）
+vercel.json                       # Vercel ルーティング設定
+tsconfig.json                     # TypeScript 設定
+```
+
+### src/
+
+```
+src/
+├── api/                          # 外部API通信（クライアントサイド）
+│   ├── nutritionix.ts            # CalorieNinjas API（食品検索）
+│   ├── gemini.ts                 # Google Gemini API（AIアドバイス）
+│   └── foodDictionary.ts         # 日本語→英語の食品名変換辞書
+│
+├── components/                   # UIコンポーネント
+│   ├── DailySummary.tsx / .css   # 1日のサマリー（カロリーリング・栄養素バー）
+│   ├── FoodSearch.tsx / .css     # 食品検索フォーム・検索結果表示
+│   ├── FoodItem.tsx / .css       # 食品アイテム（名前・カロリー・P/F/C）
+│   ├── MealSection.tsx / .css    # 食事区分カード（朝食・昼食・夕食・間食）
+│   ├── ManualEntry.tsx / .css    # 手動入力フォーム
+│   ├── Favorites.tsx / .css      # お気に入り食品一覧
+│   ├── DatePicker.tsx / .css     # 日付切り替え
+│   ├── WeeklyChart.tsx / .css    # 週間カロリー棒グラフ
+│   ├── AiAdvice.tsx / .css       # AIアドバイス表示
+│   ├── MonthlyCalendar.tsx / .css  # 月間カレンダー
+│   ├── CalendarPage.tsx / .css   # カレンダー画面（詳細パネル付き）
+│   ├── AuthModal.tsx / .css      # ログイン・新規登録モーダル
+│   ├── UserMenu.tsx / .css       # ユーザーメニュー（ログイン状態表示）
+│   └── __tests__/                # コンポーネントテスト
+│
+├── contexts/                     # React Context
+│   └── AuthContext.tsx           # 認証状態管理（Firebase Auth）
+│
+├── hooks/                        # カスタムフック
+│   ├── useMealLog.ts             # 食事記録の CRUD・日付管理
+│   ├── useGoals.ts               # 栄養目標の取得・更新
+│   ├── useFavorites.ts           # お気に入りの追加・削除・判定
+│   └── __tests__/                # フックテスト
+│
+├── lib/                          # ユーティリティ・サービス
+│   ├── firestoreService.ts       # Firestore CRUD・リアルタイム購読
+│   ├── utils.ts                  # 共通ユーティリティ関数
+│   └── __tests__/                # ユーティリティテスト
+│
+├── test/                         # テストセットアップ
+│   └── setup.ts                  # グローバル設定・クリーンアップ
+│
+├── App.tsx                       # メインコンポーネント（ページ切替・レイアウト）
+├── App.css                       # レイアウト・ナビゲーションスタイル
+├── index.css                     # デザイントークン（カラー・ガラス変数）
+├── main.tsx                      # エントリーポイント（ErrorBoundary）
+├── firebase.ts                   # Firebase 初期化設定
+├── types.ts                      # 型定義（FoodItem, DailyLog 等）
+└── vite-env.d.ts                 # Vite 型定義
+```
+
 ## 開発の背景・こだわり
 
 ### なぜこのアプリを作ったか
-日々の食事管理をしたいと思った際、既存のアプリは機能が多すぎて複雑だと感じました。
-「シンプルに食べたものを記録して、足りない栄養素をAIに教えてもらえる」アプリを目指しました。
+
+日々の食事管理をしたいと思った際、既存のアプリは機能が多すぎて複雑だと感じました。「シンプルに食べたものを記録して、足りない栄養素をAIに教えてもらえる」アプリを目指しました。
 
 ### 工夫した点
 
 - **日本語対応の食品検索**
-  CalorieNinjas APIは英語のみ対応のため、170種類以上の日本語→英語変換辞書を自作し、
-  「ごはん 150g」のような自然な日本語入力に対応しました。
+  CalorieNinjas APIは英語のみ対応のため、170種類以上の日本語→英語変換辞書を自作し、「ごはん 150g」のような自然な日本語入力に対応しました。
 
 - **ゲストモード + ログインモードの二重対応**
-  ログインなしでも localStorage で使えるようにし、ログインすれば Firestore で
-  デバイス間同期ができる設計にしました。カスタムフック（useMealLog, useFavorites, useGoals）内で
-  透過的に切り替えることで、UIコンポーネントは認証状態を意識せずに済む設計です。
+  ログインなしでも localStorage で使えるようにし、ログインすれば Firestore でデバイス間同期ができる設計にしました。カスタムフック（useMealLog, useFavorites, useGoals）内で透過的に切り替えることで、UIコンポーネントは認証状態を意識せずに済む設計です。
 
 - **AIによる栄養アドバイス**
-  Gemini APIに食事記録を送信し、管理栄養士の視点で評価・提案を生成します。
-  プロンプトエンジニアリングで出力フォーマットを統一し、
-  フロントエンドで簡易Markdownパーサーを実装して表示しています。
+  Gemini APIに食事記録を送信し、管理栄養士の視点で評価・提案を生成します。プロンプトエンジニアリングで出力フォーマットを統一し、フロントエンドで簡易Markdownパーサーを実装して表示しています。
+
+- **APIキーのサーバーサイド管理**
+  CalorieNinjas と Gemini の API キーを Vercel Serverless Functions に移行し、クライアントコードから完全に隠蔽しました。フロントエンドは `/api/nutrition`、`/api/gemini` を呼ぶだけで、キーの存在を意識しません。
+
+- **自動品質検証**
+  ESLint + Prettier でコードスタイルを統一し、Vitest でカスタムフック・ユーティリティ・コンポーネントの45件のテストを実装しました。GitHub Actions により push / PR 時に lint → format:check → test → build を自動実行し、品質を継続的に検証しています。
